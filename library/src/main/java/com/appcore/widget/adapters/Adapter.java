@@ -191,6 +191,10 @@ public abstract class Adapter<VH extends Adapter.ViewHolder, T> extends Recycler
         notifyItemRemoved(position);
     }
 
+    public void removeItem(T item) {
+        removeItem(mItems.indexOf(item));
+    }
+
     public void clear() {
         mItems.clear();
         notifyDataSetChanged();

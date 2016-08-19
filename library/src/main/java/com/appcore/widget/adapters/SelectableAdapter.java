@@ -38,7 +38,7 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
             boolean isSelected = view.isSelected();
             switch (mChoiceMode) {
                 case SINGLE:
-                    if (!mSelectedPositions.isEmpty()) {
+                    if (!mSelectedPositions.isEmpty() && mSelectedPositions.first() != position) {
                         VH viewHolder = getViewHolder(mSelectedPositions.first());
                         if (viewHolder != null) {
                             viewHolder.itemView.setSelected(false);
@@ -75,16 +75,22 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
     }
 
     @Override
-    @CallSuper
-    @SuppressWarnings("unchecked")
-    public void onBindViewHolder(VH holder, int position) {
-        holder.itemView.setSelected(mSelectedPositions.contains(position));
+    public void addItem(@NonNull T item) {
+        super.addItem(item);
+        invalidateSelection(item);
+    }
+
+    @Override
+    public void addItem(@NonNull T item, int position) {
+        super.addItem(item, position);
+        invalidateSelection(item);
     }
 
     @Override
     @CallSuper
     public void removeItem(int position) {
         mSelectedPositions.remove(position);
+        invalidateSelection(position, true);
 
         super.removeItem(position);
     }
@@ -95,6 +101,12 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
         mSelectedPositions.clear();
 
         super.clear();
+    }
+
+    @Override
+    @CallSuper
+    public void onBindViewHolder(VH holder, int position) {
+        holder.itemView.setSelected(mSelectedPositions.contains(position));
     }
 
     public ChoiceMode getChoiceMode() {
@@ -177,5 +189,30 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
 
     public void setOnItemSelectedListener(OnItemSelectedListener<T> listener) {
         mOnItemSelectedListener = listener;
+    }
+
+    private void invalidateSelection(T item) {
+        invalidateSelection(item, false);
+    }
+
+    private void invalidateSelection(T item, boolean afterRemove) {
+        invalidateSelection(mItems.indexOf(item), afterRemove);
+    }
+
+    private void invalidateSelection(int index) {
+        invalidateSelection(index, false);
+    }
+
+    private void invalidateSelection(int index, boolean afterRemove) {
+        if (!mSelectedPositions.isEmpty()) {
+            TreeSet<Integer> selectedPositions = new TreeSet<>();
+            selectedPositions.addAll(mSelectedPositions);
+
+            mSelectedPositions.clear();
+            for (Integer position : selectedPositions) {
+                mSelectedPositions.add(position >= index ? afterRemove ? position - 1 : position + 1 : position);
+            }
+            notifyDataSetChanged();
+        }
     }
 }

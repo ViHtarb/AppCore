@@ -1,5 +1,5 @@
-<manifest package="com.appcore" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="com.appcore">
 
-    <application android:name=".app.Application"/>
+    <application />
 
 </manifest>

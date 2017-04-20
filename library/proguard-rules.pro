@@ -15,20 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
--dontwarn butterknife.internal.**
-
--keep class butterknife.** { *; }
--keep class **$$ViewBinder { *; }
-
--keepattributes Signature, Exceptions, *Annotation*
+-keepattributes *Annotation*
 
 -keepclassmembers class ** {
     @com.squareup.otto.Subscribe public *;
     @com.squareup.otto.Produce public *;
-}
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
 }

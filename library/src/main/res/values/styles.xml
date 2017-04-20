@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--Base themes for app-->
+    <style name="Base.AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="editTextBackground">@drawable/edit_text_material</item>
+        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+    </style>
+
+    <style name="Base.AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="editTextBackground">@drawable/edit_text_material</item>
+        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+    </style>
+
+    <style name="AppTheme" parent="Base.AppTheme"/>
+    <style name="AppTheme.Light" parent="Base.AppTheme.Light"/>
+    <!--Base themes for app-->
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:id">@id/toolbar</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?actionBarSize</item>
-        <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
-        <item name="layout_scrollFlags">scroll|enterAlways|snap</item>
-        <item name="layout_collapseMode">pin</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
     <style name="Widget.TabLayout" parent="Widget.AppCompat.ActionBar.TabBar">

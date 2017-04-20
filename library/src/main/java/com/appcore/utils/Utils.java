@@ -1,11 +1,11 @@
 package com.appcore.utils;
 
 import android.content.Context;
-import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
+import android.content.res.Resources;
 import android.support.v4.content.PermissionChecker;
 
 import com.appcore.app.Application;
+import com.google.android.gms.iid.InstanceID;
 
 import java.util.Locale;
 
@@ -20,18 +20,28 @@ public final class Utils {
 
     @PermissionChecker.PermissionResult
     public static boolean checkPermission(Context context, String permission) {
-        return ContextCompat.checkSelfPermission(context, permission) == PermissionChecker.PERMISSION_GRANTED;
+        return PermissionChecker.checkSelfPermission(context, permission) == PermissionChecker.PERMISSION_GRANTED;
+    }
+
+    /**
+     * @return dp converted from px
+     */
+    public static float dpFromPx(float px) {
+        return px / Resources.getSystem().getDisplayMetrics().density;
+    }
+
+    /**
+     * @return px converted from dp
+     */
+    public static float pxFromDp(float dp) {
+        return dp * Resources.getSystem().getDisplayMetrics().density;
     }
 
     /**
      * @return the device imei
      */
     public static String getImei() {
-        try {
-            return Settings.Secure.getString(Application.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
-        } catch (Exception ignored) {
-            return "";
-        }
+        return InstanceID.getInstance(Application.getContext()).getId();
     }
 
     /**

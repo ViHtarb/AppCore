@@ -14,10 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appcore.R;
-import com.appcore.R2;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Base implementation of {@link android.support.v4.app.Fragment} with using {@link ButterKnife}
@@ -54,8 +53,9 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
     private AppCompatActivity mActivity;
 
     @Nullable
-    @Bind(R2.id.toolbar)
     protected Toolbar mToolbar;
+
+    private Unbinder mUnBinder;
 
     @Override
     public void onAttach(Context context) {
@@ -63,22 +63,19 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
             super.onAttach(context);
             mActivity = (AppCompatActivity) context;
         } else {
-            throw new IllegalArgumentException("Cannot attach fragment to activity. Activity must be extend AppCompatActivity");
+            throw new IllegalArgumentException("Cannot attach fragment to activity. Activity "
+                    + context + " must be extend AppCompatActivity");
         }
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), null);
-        ButterKnife.bind(this, view);
-        return view;
-    }
-
-    @Override
     @CallSuper
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(getLayoutId(), null);
+        mUnBinder = ButterKnife.bind(this, view);
+
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
         if (mToolbar != null) {
             mActivity.setSupportActionBar(mToolbar);
@@ -87,6 +84,8 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
+
+        return view;
     }
 
     @Override
@@ -98,8 +97,8 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
     @Override
     @CallSuper
     public void onDestroyView() {
-        ButterKnife.unbind(this);
         super.onDestroyView();
+        mUnBinder.unbind();
     }
 
     /**
@@ -143,5 +142,5 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
      * Return the current fragment layout id.
      */
     @LayoutRes
-    public abstract int getLayoutId();
+    protected abstract int getLayoutId();
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -54,19 +55,17 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
                     }
                     break;
             }
-            if (!isSelected && isSelectable()) {
+
+            T item = getItem(position);
+            if (!isSelected && isItemSelectable(item)) {
                 view.setSelected(true);
                 mSelectedPositions.add(position);
 
                 if (mOnItemSelectedListener != null) {
-                    mOnItemSelectedListener.onItemSelected(view, getItem(position), position);
+                    mOnItemSelectedListener.onItemSelected(view, item, position);
                 }
             }
             super.onClick(view);
-        }
-
-        public boolean isSelectable() {
-            return true;
         }
     }
 
@@ -75,31 +74,39 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
     }
 
     @Override
-    public void addItem(@NonNull T item) {
-        super.addItem(item);
+    public void add(@NonNull T item) {
+        super.add(item);
         invalidateSelection(item);
     }
 
     @Override
-    public void addItem(@NonNull T item, int position) {
-        super.addItem(item, position);
-        invalidateSelection(item);
+    public void add(@NonNull Collection<T> items) {
+        super.add(items);
+        if (!mSelectedPositions.isEmpty()) {
+            for (T item : items) {
+                invalidateSelection(item);
+            }
+        }
     }
 
     @Override
-    @CallSuper
-    public void removeItem(int position) {
+    public void remove(int position) {
         mSelectedPositions.remove(position);
         invalidateSelection(position, true);
-
-        super.removeItem(position);
+        super.remove(position);
     }
 
     @Override
-    @CallSuper
+    public void remove(@NonNull T item) {
+        int position = mItems.indexOf(item);
+        mSelectedPositions.remove(position);
+        invalidateSelection(position, true);
+        super.remove(item);
+    }
+
+    @Override
     public void clear() {
         mSelectedPositions.clear();
-
         super.clear();
     }
 
@@ -121,6 +128,26 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
         }
     }
 
+    public boolean isItemSelectable(int position) {
+        return isItemSelectable(getItem(position));
+    }
+
+    public boolean isItemSelectable(@NonNull T item) {
+        return true;
+    }
+
+    public int getSelectedItemsCount() {
+        return mSelectedPositions.size();
+    }
+
+    public List<T> getSelectedItems() {
+        List<T> selectedItems = new ArrayList<>();
+        for (Integer position : mSelectedPositions) {
+            selectedItems.add(getItem(position));
+        }
+        return selectedItems;
+    }
+
     public void setItemSelected(T item) {
         if (contains(item)) {
             setItemSelected(mItems.indexOf(item));
@@ -138,28 +165,47 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
     }
 
     public void setItemSelected(int position, boolean notify) {
-        if (position != RecyclerView.NO_POSITION && position < getItemCount()) {
-            VH viewHolder = getViewHolder(position);
-            if (viewHolder != null && viewHolder.isSelectable()) {
-                switch (mChoiceMode) {
-                    case SINGLE:
-                        if (!mSelectedPositions.isEmpty() && mSelectedPositions.first() != position) {
-                            VH selectedViewHolder = getViewHolder(mSelectedPositions.first());
-                            selectedViewHolder.itemView.setSelected(false);
-
-                            mSelectedPositions.clear();
+        if (position != RecyclerView.NO_POSITION && position < getItemCount() && isItemSelectable(position)) {
+            switch (mChoiceMode) {
+                case SINGLE:
+                    if (!mSelectedPositions.isEmpty() && mSelectedPositions.first() != position) {
+                        VH viewHolder = getViewHolder(mSelectedPositions.first());
+                        if (viewHolder != null) {
+                            viewHolder.itemView.setSelected(false);
                         }
-                        break;
+
+                        mSelectedPositions.clear();
+                    }
+                    break;
+            }
+
+            if (!mSelectedPositions.contains(position)) {
+                View view = null;
+
+                VH viewHolder = getViewHolder(position);
+                if (viewHolder != null) {
+                    view = viewHolder.itemView;
+                    view.setSelected(true);
                 }
 
-                View view = viewHolder.itemView;
-                if (!view.isSelected()) {
-                    view.setSelected(true);
+                mSelectedPositions.add(position);
 
-                    mSelectedPositions.add(position);
+                if (notify && mOnItemSelectedListener != null) {
+                    mOnItemSelectedListener.onItemSelected(view, getItem(position), position);
+                }
+            }
+        }
+    }
 
-                    if (notify && mOnItemSelectedListener != null) {
-                        mOnItemSelectedListener.onItemSelected(view, getItem(position), position);
+    public void selectAll() {
+        if (mChoiceMode == ChoiceMode.MULTIPLE) {
+            for (int i = 0; i < getItemCount(); i++) {
+                if (isItemSelectable(i)) {
+                    mSelectedPositions.add(i);
+
+                    VH viewHolder = getViewHolder(i);
+                    if (viewHolder != null) {
+                        viewHolder.itemView.setSelected(true);
                     }
                 }
             }
@@ -168,23 +214,13 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
 
     public void clearSelection() {
         for (Integer position : mSelectedPositions) {
-            VH selectedViewHolder = getViewHolder(position);
-            selectedViewHolder.itemView.setSelected(false);
+            VH viewHolder = getViewHolder(position);
+            if (viewHolder != null) {
+                viewHolder.itemView.setSelected(false);
+            }
         }
 
         mSelectedPositions.clear();
-    }
-
-    public int getSelectedItemsCount() {
-        return mSelectedPositions.size();
-    }
-
-    public List<T> getSelectedItems() {
-        List<T> selectedItems = new ArrayList<>();
-        for (Integer position : mSelectedPositions) {
-            selectedItems.add(getItem(position));
-        }
-        return selectedItems;
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener<T> listener) {
@@ -196,7 +232,9 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
     }
 
     private void invalidateSelection(T item, boolean afterRemove) {
-        invalidateSelection(mItems.indexOf(item), afterRemove);
+        if (!mSelectedPositions.isEmpty()) {
+            invalidateSelection(mItems.indexOf(item), afterRemove);
+        }
     }
 
     private void invalidateSelection(int index) {
@@ -205,8 +243,7 @@ public abstract class SelectableAdapter<VH extends SelectableAdapter.ViewHolder,
 
     private void invalidateSelection(int index, boolean afterRemove) {
         if (!mSelectedPositions.isEmpty()) {
-            TreeSet<Integer> selectedPositions = new TreeSet<>();
-            selectedPositions.addAll(mSelectedPositions);
+            TreeSet<Integer> selectedPositions = new TreeSet<>(mSelectedPositions);
 
             mSelectedPositions.clear();
             for (Integer position : selectedPositions) {

@@ -15,8 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -24,53 +26,70 @@ import butterknife.ButterKnife;
 /**
  * Created by Viнt@rь on 06.11.2015
  */
-public abstract class Adapter<VH extends Adapter.ViewHolder, T> extends RecyclerView.Adapter<VH> {
+public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends RecyclerView.Adapter<VH> {
     private final Context mContext;
     private final LayoutInflater mInflater;
 
     protected final List<T> mItems = new ArrayList<>();
+
+    protected final CacheProvider<T> mCacheProvider;
 
     protected RecyclerView mRecyclerView;
 
     protected OnItemClickListener<T> mOnItemClickListener;
     protected OnItemLongClickListener<T> mOnItemLongClickListener;
 
-    public abstract class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public abstract class ViewHolder extends RecyclerView.ViewHolder {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(new OnClickListener());
+            itemView.setOnLongClickListener(new OnLongClickListener());
 
             ButterKnife.bind(this, itemView);
         }
 
-        @Override
         @CallSuper
-        public void onClick(View v) {
+        protected void onClick(View view) {
             if (mOnItemClickListener != null && isClickable()) {
-                mOnItemClickListener.onItemClick(v, getCurrentItem(), getAdapterPosition());
+                mOnItemClickListener.onItemClick(view, getCurrentItem(), getAdapterPosition());
             }
         }
 
-        @Override
         @CallSuper
-        public boolean onLongClick(View v) {
-            return mOnItemLongClickListener != null && isClickable() && mOnItemLongClickListener.onItemLongClick(v, getCurrentItem(), getAdapterPosition());
-        }
-
-        public T getCurrentItem() {
-            return getItem(getAdapterPosition());
+        protected boolean onLongClick(View view) {
+            return mOnItemLongClickListener != null && isClickable() && mOnItemLongClickListener.onItemLongClick(view, getCurrentItem(), getAdapterPosition());
         }
 
         public boolean isClickable() {
             return true;
         }
+
+        private T getCurrentItem() {
+            return getItem(getAdapterPosition());
+        }
+
+        private class OnClickListener implements View.OnClickListener {
+
+            @Override
+            public void onClick(View v) {
+                ViewHolder.this.onClick(v);
+            }
+        }
+
+        private class OnLongClickListener implements View.OnLongClickListener {
+
+            @Override
+            public boolean onLongClick(View v) {
+                return ViewHolder.this.onLongClick(v);
+            }
+        }
     }
 
-    public Adapter(Context context) {
+    public Adapter(@NonNull Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        mCacheProvider = getCacheProvider();
     }
 
     @Override
@@ -81,10 +100,7 @@ public abstract class Adapter<VH extends Adapter.ViewHolder, T> extends Recycler
 
     @Override
     public long getItemId(int position) {
-        if (hasStableIds()) {
-            return getItem(position).hashCode();
-        }
-        return super.getItemId(position);
+        return hasStableIds() ? getItem(position).hashCode() : super.getItemId(position);
     }
 
     @Override
@@ -129,7 +145,7 @@ public abstract class Adapter<VH extends Adapter.ViewHolder, T> extends Recycler
     }
 
     public boolean isEmpty() {
-        return getItemCount() == 0;
+        return mItems.isEmpty();
     }
 
     public boolean contains(T item) {
@@ -137,62 +153,69 @@ public abstract class Adapter<VH extends Adapter.ViewHolder, T> extends Recycler
     }
 
     public T getItem(int position) {
-        if (position >= getItemCount() || position == -1) {
+        if (position >= getItemCount() || position == RecyclerView.NO_POSITION) {
             return null;
         }
         return mItems.get(position);
     }
 
     public List<T> getItems() {
-        return mItems;
+        return new ArrayList<>(mItems);
     }
 
-    public void addItem(@NonNull T item) {
+    public void add(@NonNull T item) {
         mItems.add(item);
-        sortItems();
         notifyItemInserted(mItems.indexOf(item));
+
+        if (mCacheProvider != null && isItemCacheble(item)) {
+            mCacheProvider.add(item);
+        }
     }
 
-    public void addItem(@NonNull T item, int position) {
-        mItems.add(position, item);
-        sortItems();
-        notifyItemInserted(mItems.indexOf(item));
-    }
-
-    public void addItems(@NonNull List<T> items) {
+    public void add(@NonNull Collection<T> items) {
         mItems.addAll(items);
-        sortItems();
         notifyDataSetChanged();
+
+        if (mCacheProvider != null) {
+            Iterator<T> iterator;
+            for (iterator = items.iterator(); iterator.hasNext(); ) {
+                T item = iterator.next();
+                if (!isItemCacheble(item)) {
+                    iterator.remove();
+                }
+            }
+
+            mCacheProvider.add(items);
+        }
     }
 
-    public void addItems(@NonNull List<T> items, int position) {
-        mItems.addAll(position, items);
-        sortItems();
-        notifyDataSetChanged();
-    }
-
-    public void updateItem(@NonNull T item) {
+    public void update(@NonNull T item) {
         if (mItems.contains(item)) {
             int index = mItems.indexOf(item);
-            mItems.remove(index);
-            mItems.add(index, item);
+            mItems.set(index, item);
 
-            if (getComparator() != null) {
-                sortItems();
-                notifyItemChanged(mItems.indexOf(item));
-            } else {
-                notifyItemChanged(index);
+            notifyItemChanged(index);
+
+            if (mCacheProvider != null) {
+                mCacheProvider.add(item);
             }
         }
     }
 
-    public void removeItem(int position) {
-        mItems.remove(position);
-        notifyItemRemoved(position);
+    public void remove(int position) {
+        if (mCacheProvider != null) {
+            mCacheProvider.remove(getItem(position));
+        }
+
+        removeItemInternal(position);
     }
 
-    public void removeItem(T item) {
-        removeItem(mItems.indexOf(item));
+    public void remove(@NonNull T item) {
+        removeItemInternal(mItems.indexOf(item));
+
+        if (mCacheProvider != null) {
+            mCacheProvider.remove(item);
+        }
     }
 
     public void clear() {
@@ -200,11 +223,16 @@ public abstract class Adapter<VH extends Adapter.ViewHolder, T> extends Recycler
         notifyDataSetChanged();
     }
 
-    protected final void sortItems() {
+    public void sort() {
         Comparator<T> comparator = getComparator();
         if (comparator != null) {
-            Collections.sort(mItems, comparator);
+            sort(comparator);
         }
+    }
+
+    public void sort(@NonNull Comparator<T> comparator) {
+        Collections.sort(mItems, comparator);
+        notifyDataSetChanged();
     }
 
     @Nullable
@@ -212,8 +240,35 @@ public abstract class Adapter<VH extends Adapter.ViewHolder, T> extends Recycler
         return null;
     }
 
+    @Nullable
+    protected CacheProvider<T> getCacheProvider() {
+        return null;
+    }
+
+    @Nullable
     @SuppressWarnings("unchecked")
     protected VH getViewHolder(int position) {
         return (VH) mRecyclerView.findViewHolderForAdapterPosition(position);
+    }
+
+    protected boolean isItemCached(int position) {
+        return isItemCached(getItem(position));
+    }
+
+    protected boolean isItemCached(@NonNull T item) {
+        return mCacheProvider != null && mCacheProvider.contains(item);
+    }
+
+    protected boolean isItemCacheble(int position) {
+        return isItemCacheble(getItem(position));
+    }
+
+    protected boolean isItemCacheble(@NonNull T item) {
+        return mCacheProvider != null;
+    }
+
+    protected void removeItemInternal(int position) {
+        mItems.remove(position);
+        notifyItemRemoved(position);
     }
 }

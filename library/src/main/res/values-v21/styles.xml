@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Base themes for app-->
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="buttonStyle">@style/Widget.Button</item>
+    </style>
+
+    <style name="AppTheme.Light" parent="Base.AppTheme.Light">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="buttonStyle">@style/Widget.Button</item>
+    </style>
+    <!--Base themes for app-->
+
+    <style name="Widget.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_default_material</item>
+    </style>
+</resources>

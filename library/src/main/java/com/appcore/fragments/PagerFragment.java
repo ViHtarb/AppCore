@@ -7,23 +7,19 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.appcore.R;
-import com.appcore.R2;
-
-import butterknife.Bind;
 
 /**
  * Created by Viнt@rь on 18.04.2016
  */
-public abstract class PagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public abstract class PagerFragment extends Fragment {
 
     @Nullable
-    @Bind(R2.id.tab_layout)
     protected TabLayout mTabLayout;
-
-    @Bind(R2.id.view_pager)
     protected ViewPager mViewPager;
 
     @Override
@@ -31,25 +27,35 @@ public abstract class PagerFragment extends Fragment implements ViewPager.OnPage
         return R.layout.fragment_pager;
     }
 
+    @Nullable
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mViewPager.setAdapter(getAdapter());
-        mViewPager.addOnPageChangeListener(this);
+        if (view != null) {
+            mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+            mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
 
-        if (mTabLayout != null) {
-            mTabLayout.setupWithViewPager(mViewPager);
+            if (mViewPager != null) {
+                mViewPager.setAdapter(getAdapter());
+                mViewPager.addOnPageChangeListener(new OnPageChangedListener());
+            } else {
+                throw new IllegalStateException("Required view 'R.id.view_pager' with ID " + R.id.view_pager + " for field 'mViewPager' was not found.");
+            }
+
+            if (mTabLayout != null) {
+                mTabLayout.setupWithViewPager(mViewPager);
+            }
         }
+
+        return view;
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    protected void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
     }
 
-    @Override
-    public void onPageSelected(int position) {
+    protected void onPageSelected(int position) {
         PagerAdapter adapter = getAdapter();
         if (adapter instanceof FragmentPagerAdapter || adapter instanceof FragmentStatePagerAdapter) {
             android.support.v4.app.Fragment fragment;
@@ -65,10 +71,27 @@ public abstract class PagerFragment extends Fragment implements ViewPager.OnPage
         }
     }
 
-    @Override
-    public void onPageScrollStateChanged(int state) {
+    protected void onPageScrollStateChanged(int state) {
 
     }
 
-    public abstract PagerAdapter getAdapter();
+    protected abstract PagerAdapter getAdapter();
+
+    private final class OnPageChangedListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            PagerFragment.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            PagerFragment.this.onPageSelected(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            PagerFragment.this.onPageScrollStateChanged(state);
+        }
+    }
 }

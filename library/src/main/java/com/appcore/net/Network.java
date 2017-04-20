@@ -26,6 +26,10 @@ public abstract class Network {
 
     /**
      * Unregister handler from events
+     *
+     * <p>
+     * Don`t forget unregister registered objects
+     * <p/>
      */
     public static synchronized void unregister(@NonNull Object object) {
         if (isRegistered(object)) {

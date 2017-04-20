@@ -14,6 +14,5 @@ public final class Network extends com.appcore.net.Network {
     }
 
     public void test() {
-
     }
 }

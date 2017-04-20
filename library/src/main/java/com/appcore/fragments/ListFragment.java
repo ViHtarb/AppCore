@@ -4,15 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.appcore.R;
-import com.appcore.R2;
-
-import butterknife.Bind;
 
 /**
- * Base implementation of {@link NetworkFragment} with implemented binding
+ * Base implementation of {@link Fragment} with implemented binding
  * {@link SwipeRefreshLayout} and {@link RecyclerView} to this fragment.
  *
  * <p>
@@ -33,29 +32,38 @@ import butterknife.Bind;
  * {@code android:id="id/refresh_layout"}.
  * </p>
  */
-public abstract class ListFragment extends NetworkFragment implements SwipeRefreshLayout.OnRefreshListener, RefreshFragment {
+public abstract class ListFragment extends Fragment {
 
     @Nullable
-    @Bind(R2.id.refresh_layout)
     protected SwipeRefreshLayout mRefreshLayout;
-
-    @Bind(R2.id.recycler_view)
     protected RecyclerView mRecyclerView;
 
     @Override
-    public int getLayoutId() {
+    protected int getLayoutId() {
         return R.layout.fragment_list;
     }
 
+    @Nullable
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        if (mRefreshLayout != null) {
-            mRefreshLayout.setOnRefreshListener(this);
+        if (view != null) {
+            mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
+            mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+
+            if (mRefreshLayout != null) {
+                mRefreshLayout.setOnRefreshListener(new OnRefreshListener());
+            }
+
+            if (mRecyclerView != null) {
+                mRecyclerView.setAdapter(getAdapter());
+            } else {
+                throw new IllegalStateException("Required view 'R.id.recycler_view' with ID " + R.id.recycler_view + " for field 'mRecyclerView' was not found.");
+            }
         }
 
-        mRecyclerView.setAdapter(getAdapter());
+        return view;
     }
 
     @Override
@@ -64,9 +72,8 @@ public abstract class ListFragment extends NetworkFragment implements SwipeRefre
         refresh();
     }
 
-    @Override
-    public void onRefresh() {
-        refresh();
+    protected void refresh() {
+
     }
 
     /**
@@ -99,4 +106,12 @@ public abstract class ListFragment extends NetworkFragment implements SwipeRefre
      * Return the adapter extend {@link RecyclerView.Adapter}.
      */
     protected abstract RecyclerView.Adapter getAdapter();
+
+    private final class OnRefreshListener implements SwipeRefreshLayout.OnRefreshListener {
+
+        @Override
+        public void onRefresh() {
+            ListFragment.this.refresh();
+        }
+    }
 }

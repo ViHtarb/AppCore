@@ -13,9 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.appcore.R;
-import com.appcore.R2;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -27,10 +25,6 @@ import butterknife.ButterKnife;
  * </p>
  */
 public abstract class Activity extends AppCompatActivity {
-
-    @Nullable
-    @Bind(R2.id.container)
-    View mContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,12 +54,8 @@ public abstract class Activity extends AppCompatActivity {
      * @param fragment The new fragment to place in the container.
      */
     protected void openFragment(@NonNull Fragment fragment) {
-        if (mContainer != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-        } else {
-            throw new RuntimeException("Error opening fragment. View with id R.id.container not found in activity layout");
-        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
 
     /**

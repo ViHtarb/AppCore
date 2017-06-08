@@ -22,11 +22,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:' + rootProject.ext.junitVersion
-    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
-    compile project(':library')
+    testImplementation 'junit:junit:' + rootProject.ext.junitVersion
+    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
+    implementation 'com.jakewharton:butterknife:8.6.0'
+    implementation project(':library')
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 }

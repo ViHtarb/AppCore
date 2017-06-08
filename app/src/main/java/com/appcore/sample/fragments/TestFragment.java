@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import com.appcore.fragments.Fragment;
 import com.appcore.sample.R;
 
+import butterknife.OnClick;
+
 /**
  * Created by Viнt@rь on 20.04.2017
  */
@@ -20,6 +22,7 @@ public class TestFragment extends Fragment {
         return R.layout.fragment_test;
     }
 
+/*
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,5 +36,11 @@ public class TestFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Log.d("TEST", "onViewCreated");
+    }
+*/
+
+    @OnClick(R.id.test_button)
+    public void onTestClick() {
+        Log.d("TEST", "TEST");
     }
 }

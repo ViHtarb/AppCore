@@ -15,11 +15,6 @@ public class SimpleCacheProvider<T> implements CacheProvider<T> {
     protected final Set<T> mCache = new HashSet<>();
 
     @Override
-    public int size() {
-        return mCache.size();
-    }
-
-    @Override
     public boolean isEmpty() {
         return mCache.isEmpty();
     }
@@ -27,6 +22,11 @@ public class SimpleCacheProvider<T> implements CacheProvider<T> {
     @Override
     public boolean contains(@NonNull T item) {
         return mCache.contains(item);
+    }
+
+    @Override
+    public int size() {
+        return mCache.size();
     }
 
     @Override

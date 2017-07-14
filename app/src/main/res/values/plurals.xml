@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_favorite_several">%s commented your favorite help request</string>
+    <string name="activity_favorite">@string/activity_favorite_several</string>
+    <string name="activity_favorite_female">@string/activity_favorite</string>
+    <string name="activity_favorite_more" formatted="false">%s and %s commented your favorite help request</string>
+
+    <string name="activity_favorite_one">%s прокомментировал Вашу избранную просьбу</string>
+    <string name="activity_favorite_one_female">%s прокомментировала Вашу избранную просьбу</string>
+    <string name="activity_favorite_other">%s прокомментировали Вашу избранную просьбу</string>
+
+    <plurals name="activity_favorite">
+        <item quantity="one">@string/activity_favorite_one</item>
+        <item quantity="other">@string/activity_favorite_other</item>
+    </plurals>
+
+    <plurals name="activity_favorite_female">
+        <item quantity="one">@string/activity_favorite_one_female</item>
+        <item quantity="other">@string/activity_favorite_other</item>
+    </plurals>
+
+
+    <!-- Phrase describing a time duration using seconds [CHAR LIMIT=16] -->
+    <plurals name="duration_seconds">
+        <item quantity="one">%d second</item>
+        <item quantity="other">%d seconds</item>
+    </plurals>
+    <!-- Phrase describing a time duration using minutes [CHAR LIMIT=16] -->
+    <plurals name="duration_minutes">
+        <item quantity="one">1 minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+    <!-- Phrase describing a time duration using hours [CHAR LIMIT=16] -->
+    <plurals name="duration_hours">
+        <item quantity="one">1 hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+
+    <!-- A string denoting the current point in time that should be as short as possible. Abbreviations are preferred to full strings as this might be shown repetitively. It is used in the header of notifications. [CHAR LIMIT=8]-->
+    <string name="now_string_shortest">now</string>
+
+    <!-- Phrase describing a time duration using minutes that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
+    <plurals name="duration_seconds_shortest">
+        <item quantity="one">%ds</item>
+        <item quantity="other">%ds</item>
+    </plurals>
+
+    <!-- Phrase describing a time duration using minutes that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
+    <plurals name="duration_minutes_shortest">
+        <item quantity="one">%dm</item>
+        <item quantity="other">%dm</item>
+    </plurals>
+
+    <!-- Phrase describing a time duration using hours that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
+    <plurals name="duration_hours_shortest">
+        <item quantity="one">%dh</item>
+        <item quantity="other">%dh</item>
+    </plurals>
+
+    <!-- Phrase describing a time duration using days that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
+    <plurals name="duration_days_shortest">
+        <item quantity="one">%dd</item>
+        <item quantity="other">%dd</item>
+    </plurals>
+
+    <!-- Phrase describing a time duration using years that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
+    <plurals name="duration_years_shortest">
+        <item quantity="one">%dy</item>
+        <item quantity="other">%dy</item>
+    </plurals>
+</resources>

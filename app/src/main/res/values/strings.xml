@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AppCore</string>
+
+    <string name="activity_m_ago">%d min ago</string>
+    <string name="activity_h_ago">%d h ago</string>
+
+    <string name="now">Just now</string>
 </resources>

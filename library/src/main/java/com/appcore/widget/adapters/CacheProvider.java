@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface CacheProvider<T> {
 
-    int size();
-
     boolean isEmpty();
     boolean contains(@NonNull T item);
+
+    int size();
 
     void add(@NonNull T item);
     void add(@NonNull Collection<T> collection);

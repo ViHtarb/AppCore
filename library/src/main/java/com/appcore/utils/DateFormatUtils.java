@@ -25,7 +25,7 @@ public final class DateFormatUtils {
         DATE_FORMAT.setTimeZone(TimeZone.getDefault());
     }
 
-    public static String format(@NonNull final String pattern, final Calendar calendar) {
+    public static String format(@NonNull final String pattern, @NonNull final Calendar calendar) {
         return format(pattern, calendar.getTimeInMillis());
     }
 
@@ -33,7 +33,7 @@ public final class DateFormatUtils {
         return format(pattern, new Date(millis));
     }
 
-    public static String format(@NonNull final String pattern, final Date date) {
+    public static String format(@NonNull final String pattern, @NonNull final Date date) {
         DATE_FORMAT.applyPattern(pattern);
         return DATE_FORMAT.format(date);
     }

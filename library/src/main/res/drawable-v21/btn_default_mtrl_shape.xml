@@ -15,7 +15,6 @@
 -->
 
 <!-- Used as the canonical button shape. -->
-
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
        android:insetBottom="@dimen/button_inset_vertical_material"
        android:insetLeft="@dimen/button_inset_horizontal_material"

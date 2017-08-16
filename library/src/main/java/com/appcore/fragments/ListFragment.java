@@ -66,39 +66,21 @@ public abstract class ListFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        refresh();
-    }
-
-    protected void refresh() {
+    protected void onRefresh() {
 
     }
 
     /**
-     * Notify the widget that refresh state has changed to refreshing.
+     * Notify the {@link SwipeRefreshLayout}(if present in layout) that refresh state has changed. Do not call this when
+     * refresh is triggered by a swipe gesture.
      *
      * <p>
      * See {@link SwipeRefreshLayout#setRefreshing(boolean)} for more details.
      * </p>
      */
-    protected void enableRefreshing() {
+    protected void setRefreshing(boolean refreshing) {
         if (mRefreshLayout != null) {
-            mRefreshLayout.setRefreshing(true);
-        }
-    }
-
-    /**
-     * Notify the widget that refresh state has changed to stop refreshing.
-     *
-     * <p>
-     * See {@link SwipeRefreshLayout#setRefreshing(boolean)} for more details.
-     * </p>
-     */
-    protected void disableRefreshing() {
-        if (mRefreshLayout != null) {
-            mRefreshLayout.setRefreshing(false);
+            mRefreshLayout.setRefreshing(refreshing);
         }
     }
 
@@ -111,7 +93,7 @@ public abstract class ListFragment extends Fragment {
 
         @Override
         public void onRefresh() {
-            ListFragment.this.refresh();
+            ListFragment.this.onRefresh();
         }
     }
 }

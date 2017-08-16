@@ -23,9 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
     testImplementation 'junit:junit:' + rootProject.ext.junitVersion
     implementation 'com.android.support:design:' + rootProject.ext.supportLibraryVersion
     implementation 'com.google.android.gms:play-services-iid:' + rootProject.ext.playServicesVersion

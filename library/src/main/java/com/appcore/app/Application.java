@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.google.android.gms.iid.InstanceID;
+
 /**
  * Implementation of {@link android.app.Application} with static wrappers
  * for ease of getting managers and other general objects.
@@ -32,6 +34,8 @@ import android.view.inputmethod.InputMethodManager;
  * </p>
  */
 public class Application extends android.app.Application {
+
+    private InstanceID mInstanceId;
 
     private static Application sInstance;
     public static Application getInstance() {
@@ -59,6 +63,13 @@ public class Application extends android.app.Application {
 
     public static LayoutInflater getInflater() {
         return LayoutInflater.from(sInstance);
+    }
+
+    public static InstanceID getInstanceId() {
+        if (sInstance.mInstanceId == null) {
+            sInstance.mInstanceId = InstanceID.getInstance(getAppContext());
+        }
+        return sInstance.mInstanceId;
     }
 
     public static SharedPreferences getDefaultPreferences() {

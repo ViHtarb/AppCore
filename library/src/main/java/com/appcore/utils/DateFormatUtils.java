@@ -25,12 +25,12 @@ public final class DateFormatUtils {
         DATE_FORMAT.setTimeZone(TimeZone.getDefault());
     }
 
-    public static String format(@NonNull final String pattern, @NonNull final Calendar calendar) {
-        return format(pattern, calendar.getTimeInMillis());
-    }
-
     public static String format(@NonNull final String pattern, final long millis) {
         return format(pattern, new Date(millis));
+    }
+
+    public static String format(@NonNull final String pattern, @NonNull final Calendar calendar) {
+        return format(pattern, calendar.getTimeInMillis());
     }
 
     public static String format(@NonNull final String pattern, @NonNull final Date date) {

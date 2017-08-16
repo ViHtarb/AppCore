@@ -23,7 +23,7 @@ public abstract class PagerFragment extends Fragment {
     protected ViewPager mViewPager;
 
     @Override
-    public int getLayoutId() {
+    protected int getLayoutId() {
         return R.layout.fragment_pager;
     }
 

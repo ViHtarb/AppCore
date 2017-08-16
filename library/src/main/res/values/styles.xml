@@ -1,28 +1,27 @@
 <resources>
 
     <!--Base themes for app-->
-    <style name="Base.AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="editTextBackground">@drawable/edit_text_material</item>
-        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+    <style name="Base.V7.Theme.AppCore" parent="Theme.AppCompat.NoActionBar">
+        <item name="toolbarStyle">@style/Widget.AppCore.Toolbar</item>
     </style>
 
-    <style name="Base.AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="editTextBackground">@drawable/edit_text_material</item>
-        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+    <style name="Base.V7.Theme.AppCore.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="toolbarStyle">@style/Widget.AppCore.Toolbar</item>
     </style>
 
-    <style name="AppTheme" parent="Base.AppTheme"/>
-    <style name="AppTheme.Light" parent="Base.AppTheme.Light"/>
+    <style name="Base.Theme.AppCore" parent="Base.V7.Theme.AppCore"/>
+    <style name="Base.Theme.AppCore.Light" parent="Base.V7.Theme.AppCore.Light"/>
+
+    <style name="Theme.AppCore" parent="Base.Theme.AppCore"/>
+    <style name="Theme.AppCore.Light" parent="Base.Theme.AppCore.Light"/>
     <!--Base themes for app-->
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
+    <style name="Widget.AppCore.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:id">@id/toolbar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
-    <style name="Widget.TabLayout" parent="Widget.AppCompat.ActionBar.TabBar">
+    <style name="Widget.AppCore.TabLayout" parent="Widget.AppCompat.ActionBar.TabBar">
         <item name="android:id">@id/tab_layout</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

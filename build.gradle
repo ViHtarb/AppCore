@@ -30,7 +30,7 @@ ext {
     targetSdkVersion = 25
 
     supportLibraryVersion = "25.4.0"
-    playServicesVersion = "11.0.4"
+    playServicesVersion = "11.2.0"
 
     butterKnifeVersion = "8.7.0"
 

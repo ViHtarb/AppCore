@@ -33,6 +33,13 @@ public class TestFragment extends Fragment {
         return R.layout.fragment_test;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d("TEST", "TEST2 " + System.currentTimeMillis());
+    }
+
     /*
     @Nullable
     @Override
@@ -52,6 +59,7 @@ public class TestFragment extends Fragment {
 
     @OnClick(R.id.test_button)
     public void onTestClick() {
+
 /*        Log.d("TEST", String.valueOf(DateUtils.getRelativeTimeSpanString(mStartTime, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS,
                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL)));
 
@@ -64,6 +72,26 @@ public class TestFragment extends Fragment {
         Log.d("TEST", String.valueOf(DateFormat.getTimeFormat(getContext()).format(new Date(System.currentTimeMillis()))));
         //Log.d("TEST", String.valueOf(DateFormat.getTimeFormatString());
         Log.d("TEST", String.valueOf(DateFormat.format(DateFormatUtils.DATE_PATTERN, System.currentTimeMillis())));
+
+        Log.d("TEST", String.valueOf(formatDuration(DateUtils.HOUR_IN_MILLIS * 101)));
+
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < 1000000; i++) {
+            TimeUnit.DAYS.toMillis(TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()));
+        }
+
+        Log.d("TEST", "elapsed Time = " + (System.currentTimeMillis() - startTime));
+
+        startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < 1000000; i++) {
+            long date = System.currentTimeMillis() - System.currentTimeMillis() % 86400000;
+        }
+
+        Log.d("TEST", "elapsed Time 2 = " + (System.currentTimeMillis() - startTime));
+
+
         //Log.d("TEST", String.valueOf(DateFormat.format("d MMMM, HH:mm", System.currentTimeMillis())));
         //Log.d("TEST", String.valueOf(DateFormat.format("d MMMM, HH:mm", System.currentTimeMillis())));
         /*
@@ -559,15 +587,18 @@ public class TestFragment extends Fragment {
 
     public CharSequence formatDuration(long millis) {
         final Resources res = getResources();
-/*        if (millis >= DateUtils.HOUR_IN_MILLIS) {
-            final int hours = (int) ((millis + 1800000) / DateUtils.HOUR_IN_MILLIS);
+        if (millis >= DateUtils.WEEK_IN_MILLIS) {
+            final int weeks = (int) (millis / DateUtils.WEEK_IN_MILLIS);
+            return res.getQuantityString(R.plurals.duration_weeks, weeks, weeks);
+        } else if (millis >= DateUtils.HOUR_IN_MILLIS) {
+            final int hours = (int) (millis / DateUtils.HOUR_IN_MILLIS);
             return res.getQuantityString(R.plurals.duration_hours, hours, hours);
         } else if (millis >= DateUtils.MINUTE_IN_MILLIS) {
-            final int minutes = (int) ((millis + 30000) / DateUtils.MINUTE_IN_MILLIS);
+            final int minutes = (int) (millis / DateUtils.MINUTE_IN_MILLIS);
             return res.getQuantityString(R.plurals.duration_minutes, minutes, minutes);
-        } else {*/
-            final int seconds = (int) ((millis + 500) / DateUtils.SECOND_IN_MILLIS);
+        } else {
+            final int seconds = (int) (millis / DateUtils.SECOND_IN_MILLIS);
             return res.getQuantityString(R.plurals.duration_seconds, seconds, seconds);
-        //}
+        }
     }
 }

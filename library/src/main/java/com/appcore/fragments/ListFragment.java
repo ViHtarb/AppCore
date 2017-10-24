@@ -49,8 +49,8 @@ public abstract class ListFragment extends Fragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         if (view != null) {
-            mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
-            mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+            mRefreshLayout = view.findViewById(R.id.refresh_layout);
+            mRecyclerView = view.findViewById(R.id.recycler_view);
 
             if (mRefreshLayout != null) {
                 mRefreshLayout.setOnRefreshListener(new OnRefreshListener());

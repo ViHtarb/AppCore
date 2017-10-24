@@ -87,9 +87,13 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
     }
 
     public Adapter(@NonNull Context context) {
+        this(context, null);
+    }
+
+    public Adapter(@NonNull Context context, CacheProvider<T> cacheProvider) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
-        mCacheProvider = getCacheProvider();
+        mCacheProvider = cacheProvider;
     }
 
     @Override
@@ -241,8 +245,9 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
     }
 
     @Nullable
-    protected CacheProvider<T> getCacheProvider() {
-        return null;
+    @SuppressWarnings("unchecked")
+    protected <CP extends CacheProvider<T>> CP getCacheProvider() {
+        return (CP) mCacheProvider;
     }
 
     @Nullable

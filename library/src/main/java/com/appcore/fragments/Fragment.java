@@ -75,7 +75,7 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(getLayoutId(), null);
         mUnBinder = ButterKnife.bind(this, view);
 
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        mToolbar = view.findViewById(R.id.toolbar);
 
         if (mToolbar != null) {
             mActivity.setSupportActionBar(mToolbar);

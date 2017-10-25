@@ -3,10 +3,11 @@ package com.appcore.widget.adapters;
 import android.support.annotation.NonNull;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Viнt@rь on 24.08.2016
+ *
+ * TODO think about update method
  */
 public interface CacheProvider<T> {
 
@@ -19,5 +20,5 @@ public interface CacheProvider<T> {
     void add(@NonNull Collection<T> collection);
     void remove(@NonNull T item);
 
-    List<T> getCache();
+    Collection<T> getCache();
 }

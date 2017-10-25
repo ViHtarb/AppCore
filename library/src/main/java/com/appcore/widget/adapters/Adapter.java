@@ -25,6 +25,10 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Viнt@rь on 06.11.2015
+ *
+ * TODO think about remove {@link Adapter#sort()} and {@link Adapter#getComparator()} methods
+ * TODO think about add update(item) method by index
+ * TODO think about applying cache data if cache provider is presents
  */
 public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends RecyclerView.Adapter<VH> {
     private final Context mContext;

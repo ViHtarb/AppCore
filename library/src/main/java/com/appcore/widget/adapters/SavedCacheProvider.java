@@ -47,6 +47,6 @@ public class SavedCacheProvider<T> extends SimpleCacheProvider<T> {
 
     protected void save() {
         SharedPreferences.Editor editor = mCacheStorage.edit();
-        editor.putString(mName, mGson.toJson(mCacheStorage)).apply();
+        editor.putString(mName, mGson.toJson(mCache)).apply();
     }
 }

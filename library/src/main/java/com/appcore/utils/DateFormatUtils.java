@@ -1,20 +1,20 @@
 package com.appcore.utils;
 
-import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.text.format.DateFormat;
+import android.text.format.DateUtils;
 
-import java.text.SimpleDateFormat;
+import com.appcore.R;
+import com.appcore.app.Application;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * Created by Viнt@rь on 06.07.2016
  */
 public final class DateFormatUtils {
-
-    @SuppressLint("SimpleDateFormat")
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat();
 
     public static final String MINUTES_PATTERN = "mm:ss";
     public static final String TIME_PATTERN = "HH:mm:ss";
@@ -22,19 +22,54 @@ public final class DateFormatUtils {
 
     private DateFormatUtils() {
         // not instantiate
-        DATE_FORMAT.setTimeZone(TimeZone.getDefault());
     }
 
-    public static String format(@NonNull final String pattern, final long millis) {
-        return format(pattern, new Date(millis));
+    /**
+     *  Deprecated use {@link android.text.format.DateFormat#format(CharSequence, long)} instead
+     */
+    @Deprecated
+    public static String format(@NonNull final CharSequence pattern, final long millis) {
+        return String.valueOf(DateFormat.format(pattern, millis));
     }
 
-    public static String format(@NonNull final String pattern, @NonNull final Calendar calendar) {
-        return format(pattern, calendar.getTimeInMillis());
+    /**
+     *  Deprecated use {@link android.text.format.DateFormat#format(CharSequence, Date)} instead
+     */
+    @Deprecated
+    public static String format(@NonNull final CharSequence pattern, @NonNull final Date date) {
+        return String.valueOf(DateFormat.format(pattern, date));
     }
 
-    public static String format(@NonNull final String pattern, @NonNull final Date date) {
-        DATE_FORMAT.applyPattern(pattern);
-        return DATE_FORMAT.format(date);
+    /**
+     *  Deprecated use {@link android.text.format.DateFormat#format(CharSequence, Calendar)} instead
+     */
+    @Deprecated
+    public static String format(@NonNull final CharSequence pattern, @NonNull final Calendar calendar) {
+        return String.valueOf(DateFormat.format(pattern, calendar));
+    }
+
+    /**
+     * Returns the given duration in a human-friendly format. For example,
+     * "4 minutes" or "1 second". Returns only the largest meaningful unit of time,
+     * from seconds up to weeks.
+     */
+    public static String formatDuration(long millis) {
+        final Resources res = Application.getAppResources();
+        if (millis >= DateUtils.WEEK_IN_MILLIS) {
+            final int weeks = (int) (millis / DateUtils.WEEK_IN_MILLIS);
+            return res.getQuantityString(R.plurals.duration_weeks, weeks, weeks);
+        } else if (millis >= DateUtils.DAY_IN_MILLIS) {
+            final int days = (int) (millis / DateUtils.DAY_IN_MILLIS);
+            return res.getQuantityString(R.plurals.duration_days, days, days);
+        } else if (millis >= DateUtils.HOUR_IN_MILLIS) {
+            final int hours = (int) (millis / DateUtils.HOUR_IN_MILLIS);
+            return res.getQuantityString(R.plurals.duration_hours, hours, hours);
+        } else if (millis >= DateUtils.MINUTE_IN_MILLIS) {
+            final int minutes = (int) (millis / DateUtils.MINUTE_IN_MILLIS);
+            return res.getQuantityString(R.plurals.duration_minutes, minutes, minutes);
+        } else {
+            final int seconds = (int) (millis / DateUtils.SECOND_IN_MILLIS);
+            return res.getQuantityString(R.plurals.duration_seconds, seconds, seconds);
+        }
     }
 }

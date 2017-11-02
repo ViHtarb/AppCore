@@ -1,7 +1,6 @@
 package com.appcore.sample.fragments;
 
 import android.content.res.Resources;
-import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import com.appcore.sample.R;
 import com.appcore.utils.DateFormatUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -68,10 +66,13 @@ public class TestFragment extends Fragment {
         Log.d("TEST", getResources().getQuantityString(R.plurals.activity_favorite, 1));
         Log.d("TEST", String.format(getResources().getQuantityString(R.plurals.activity_favorite, 10), "andre and 10"));*/
         //Log.d("TEST", getResources().getQuantityString(R.plurals.activity_favorite, 10));
+/*
 
         Log.d("TEST", String.valueOf(DateFormat.getTimeFormat(getContext()).format(new Date(System.currentTimeMillis()))));
         //Log.d("TEST", String.valueOf(DateFormat.getTimeFormatString());
         Log.d("TEST", String.valueOf(DateFormat.format(DateFormatUtils.DATE_PATTERN, System.currentTimeMillis())));
+
+
 
         Log.d("TEST", String.valueOf(formatDuration(DateUtils.HOUR_IN_MILLIS * 101)));
 
@@ -90,7 +91,12 @@ public class TestFragment extends Fragment {
         }
 
         Log.d("TEST", "elapsed Time 2 = " + (System.currentTimeMillis() - startTime));
+*/
 
+/*        DateTimeUtils;
+        DateTimeFormatUtils;
+        TimeFormatUtils;
+        TimeFormat;*/
 
         //Log.d("TEST", String.valueOf(DateFormat.format("d MMMM, HH:mm", System.currentTimeMillis())));
         //Log.d("TEST", String.valueOf(DateFormat.format("d MMMM, HH:mm", System.currentTimeMillis())));

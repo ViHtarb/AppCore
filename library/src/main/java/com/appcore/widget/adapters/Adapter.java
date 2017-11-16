@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -185,15 +184,13 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
         notifyDataSetChanged();
 
         if (mCacheProvider != null) {
-            Iterator<T> iterator;
-            for (iterator = items.iterator(); iterator.hasNext(); ) {
-                T item = iterator.next();
-                if (!isItemCacheble(item)) {
-                    iterator.remove();
+            List<T> cachebleItems = new ArrayList<>();
+            for (T item : items) {
+                if (isItemCacheble(item)) {
+                    cachebleItems.add(item);
                 }
             }
-
-            mCacheProvider.add(items);
+            mCacheProvider.add(cachebleItems);
         }
     }
 

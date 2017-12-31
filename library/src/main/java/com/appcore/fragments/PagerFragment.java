@@ -1,6 +1,7 @@
 package com.appcore.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -29,12 +30,12 @@ public abstract class PagerFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         if (view != null) {
-            mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-            mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
+            mTabLayout = view.findViewById(R.id.tab_layout);
+            mViewPager = view.findViewById(R.id.view_pager);
 
             if (mViewPager != null) {
                 mViewPager.setAdapter(getAdapter());

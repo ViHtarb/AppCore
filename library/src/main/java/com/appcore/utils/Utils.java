@@ -1,10 +1,11 @@
 package com.appcore.utils;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
-import android.support.v4.content.PermissionChecker;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
@@ -21,9 +22,8 @@ public final class Utils {
         // not instantiate
     }
 
-    @PermissionChecker.PermissionResult
     public static boolean checkPermission(Context context, String permission) {
-        return PermissionChecker.checkSelfPermission(context, permission) == PermissionChecker.PERMISSION_GRANTED;
+        return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     public static int getScreenWidth() {

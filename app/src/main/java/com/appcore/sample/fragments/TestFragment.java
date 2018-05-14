@@ -1,15 +1,37 @@
 package com.appcore.sample.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.view.WindowCompat;
+import android.support.v4.widget.PopupWindowCompat;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.appcore.fragments.Fragment;
+import com.appcore.fragments.ListFragment;
 import com.appcore.sample.R;
 import com.appcore.utils.DateFormatUtils;
+import com.appcore.widget.adapters.Adapter;
+
+import junit.framework.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -23,20 +45,133 @@ public class TestFragment extends Fragment {
 
     private final long mStartTime = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS * 30;
 
-    @BindView(R.id.test_text_view)
-    TextView mTestTextView;
+    //private TestAdapter mAdapter;
+
+/*    @BindView(R.id.test_text_view)
+    TextView mTestTextView;*/
+
+    @BindView(R.id.test_button)
+    Button mTestButton;
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_test;
     }
 
-    @Override
+    @OnClick(R.id.test_button)
+    public void onClickTest() {
+        TextView textView = new TextView(getContext());
+        textView.setText("TEST");
+
+        //requireActivity().getWindow().setFlags();
+
+        PopupWindow popupWindow = new PopupWindow(getContext());
+        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setContentView(textView);
+
+
+
+        popupWindow.showAsDropDown(mTestButton);
+
+        WindowManager wm = (WindowManager) requireContext().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams p = (WindowManager.LayoutParams) textView.getRootView().getLayoutParams();
+        p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        p.dimAmount = 0.6f;
+        wm.updateViewLayout(textView.getRootView(), p);
+
+        //dimBehind(popupWindow);
+
+
+/*
+        mWindow.setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+                WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);*/
+    }
+
+    public static void dimBehind(PopupWindow popupWindow) {
+        View container = popupWindow.getContentView().getRootView();
+        Context context = popupWindow.getContentView().getContext();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
+        p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        //p.dimAmount = 0.3f;
+        wm.updateViewLayout(container, p);
+    }
+
+/*    @Override
+    protected RecyclerView.Adapter getAdapter() {
+        if (mAdapter == null) {
+            mAdapter = new TestAdapter(getContext());
+
+            for (int i = 0; i < 100; i++) {
+                mAdapter.add(new TestObject());
+            }
+
+            Collection<TestObject> integers = new ArrayList<>();
+
+            mAdapter.add(integers);
+        }
+        return mAdapter;
+    }*/
+
+/*    static final class TestObject {
+
+    }*/
+
+ /*   final class MyItemDetailsLookup extends ItemDetailsLookup {
+
+        private final RecyclerView mRecyclerView;
+
+        MyItemDetailsLookup(RecyclerView recyclerView) {
+            mRecyclerView = recyclerView;
+        }
+
+        public ItemDetails getItemDetails(MotionEvent e) {
+            View view = mRecyclerView.findChildViewUnder(e.getX(), e.getY());
+            if (view != null) {
+                RecyclerView.ViewHolder holder = mRecyclerView.getChildViewHolder(view);
+                if (holder instanceof TestAdapter.TestViewHolder) {
+                    return (((TestAdapter.TestViewHolder) holder).getItemDetails());
+                }
+            }
+            return null;
+        }
+    }*/
+/*
+    static final class TestAdapter<T extends TestObject> extends Adapter<TestAdapter.TestViewHolder, T> {
+
+        final class TestViewHolder extends Adapter.ViewHolder {
+
+            @BindView(R.id.text_view)
+            TextView mTextView;
+
+            public TestViewHolder(View itemView) {
+                super(itemView);
+            }
+        }
+
+        public TestAdapter(@NonNull Context context) {
+            super(context);
+        }
+
+        @NonNull
+        @Override
+        public TestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new TestViewHolder(getInflater().inflate(R.layout.item_layout_test, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull TestViewHolder holder, int position) {
+            holder.mTextView.setText("Position = " + position);
+        }
+    }*/
+
+/*    @Override
     public void onResume() {
         super.onResume();
 
         Log.d("TEST", "TEST2 " + System.currentTimeMillis());
-    }
+    }*/
 
     /*
     @Nullable
@@ -55,7 +190,7 @@ public class TestFragment extends Fragment {
     }
 */
 
-    @OnClick(R.id.test_button)
+    //@OnClick(R.id.test_button)
     public void onTestClick() {
 
 /*        Log.d("TEST", String.valueOf(DateUtils.getRelativeTimeSpanString(mStartTime, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS,
@@ -524,7 +659,10 @@ public class TestFragment extends Fragment {
         Log.d("TEST", "---------------------------------------------------------------------");*/
     }
 
+    @SuppressLint("ConstantLocale")
     private static final SimpleDateFormat WEEK_FORMAT = new SimpleDateFormat("d MMMM, HH:mm", Locale.getDefault());
+
+    @SuppressLint("ConstantLocale")
     private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("EEEE, HH:mm", Locale.getDefault());
 
     protected String formatTimeNew(long milliseconds) {

@@ -59,7 +59,7 @@ public final class Utils {
     /**
      * @return the device imei
      *
-     * @deprecated Use {@link #getInstanceId()}} instead
+     * @deprecated Use {@link #getInstanceId()}} instead.
      */
     @Deprecated
     public static String getImei() {

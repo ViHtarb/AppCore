@@ -8,7 +8,7 @@ import android.support.annotation.StringRes;
 public interface PageFragment {
 
     @StringRes
-    int getTitle();
+    int getTitle(); // TODO return CharSequence title
 
-    void onSelected();
+    void onSelected(); // TODO in java 8 implement this method
 }

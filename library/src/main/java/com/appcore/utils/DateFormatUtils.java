@@ -25,7 +25,7 @@ public final class DateFormatUtils {
     }
 
     /**
-     *  Deprecated use {@link android.text.format.DateFormat#format(CharSequence, long)} instead
+     * @deprecated Use {@link android.text.format.DateFormat#format(CharSequence, long)} instead.
      */
     @Deprecated
     public static String format(@NonNull final CharSequence pattern, final long millis) {
@@ -33,7 +33,7 @@ public final class DateFormatUtils {
     }
 
     /**
-     *  Deprecated use {@link android.text.format.DateFormat#format(CharSequence, Date)} instead
+     * @deprecated Use {@link android.text.format.DateFormat#format(CharSequence, Date)} instead.
      */
     @Deprecated
     public static String format(@NonNull final CharSequence pattern, @NonNull final Date date) {
@@ -41,7 +41,7 @@ public final class DateFormatUtils {
     }
 
     /**
-     *  Deprecated use {@link android.text.format.DateFormat#format(CharSequence, Calendar)} instead
+     * @deprecated Use {@link android.text.format.DateFormat#format(CharSequence, Calendar)} instead.
      */
     @Deprecated
     public static String format(@NonNull final CharSequence pattern, @NonNull final Calendar calendar) {

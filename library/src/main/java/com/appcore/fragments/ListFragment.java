@@ -54,7 +54,12 @@ public abstract class ListFragment extends Fragment {
             mRecyclerView = view.findViewById(R.id.recycler_view);
 
             if (mRefreshLayout != null) {
-                mRefreshLayout.setOnRefreshListener(new OnRefreshListener());
+                mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        ListFragment.this.onRefresh();
+                    }
+                });
             }
 
             if (mRecyclerView != null) {
@@ -89,12 +94,4 @@ public abstract class ListFragment extends Fragment {
      * Return the adapter extend {@link RecyclerView.Adapter}.
      */
     protected abstract RecyclerView.Adapter getAdapter();
-
-    private final class OnRefreshListener implements SwipeRefreshLayout.OnRefreshListener {
-
-        @Override
-        public void onRefresh() {
-            ListFragment.this.onRefresh();
-        }
-    }
 }

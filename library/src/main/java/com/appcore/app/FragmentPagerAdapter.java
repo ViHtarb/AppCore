@@ -24,7 +24,7 @@ public abstract class FragmentPagerAdapter extends android.support.v4.app.Fragme
     public CharSequence getPageTitle(int position) {
         Fragment fragment = getItem(position);
         if (fragment instanceof PageFragment) {
-            return mContext.getString(((PageFragment) fragment).getTitle());
+            return ((PageFragment) fragment).getTitle(mContext);
         }
         return null;
     }

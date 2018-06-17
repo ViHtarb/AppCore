@@ -18,7 +18,10 @@ public interface CacheProvider<T> {
 
     void add(@NonNull T item);
     void add(@NonNull Collection<T> collection);
+    void update(@NonNull T item);
     void remove(@NonNull T item);
+
+    void clear();
 
     Collection<T> getCache();
 }

@@ -39,7 +39,22 @@ public abstract class PagerFragment extends Fragment {
 
             if (mViewPager != null) {
                 mViewPager.setAdapter(getAdapter());
-                mViewPager.addOnPageChangeListener(new OnPageChangedListener());
+                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        PagerFragment.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        PagerFragment.this.onPageSelected(position);
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                        PagerFragment.this.onPageScrollStateChanged(state);
+                    }
+                });
             } else {
                 throw new IllegalStateException("Required view 'R.id.view_pager' with ID " + R.id.view_pager + " for field 'mViewPager' was not found.");
             }
@@ -66,7 +81,7 @@ public abstract class PagerFragment extends Fragment {
                 fragment = ((FragmentStatePagerAdapter) adapter).getItem(position);
             }
 
-            if (fragment != null && fragment instanceof PageFragment) {
+            if (fragment instanceof PageFragment) {
                 ((PageFragment) fragment).onSelected();
             }
         }
@@ -77,22 +92,4 @@ public abstract class PagerFragment extends Fragment {
     }
 
     protected abstract PagerAdapter getAdapter();
-
-    private final class OnPageChangedListener implements ViewPager.OnPageChangeListener {
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            PagerFragment.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            PagerFragment.this.onPageSelected(position);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            PagerFragment.this.onPageScrollStateChanged(state);
-        }
-    }
 }

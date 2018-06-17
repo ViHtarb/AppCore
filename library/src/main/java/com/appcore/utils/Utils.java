@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -22,7 +23,7 @@ public final class Utils {
         // not instantiate
     }
 
-    public static boolean checkPermission(Context context, String permission) {
+    public static boolean checkPermission(@NonNull Context context, @NonNull String permission) {
         return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 

@@ -16,6 +16,7 @@ import java.util.Set;
 public class SavedCacheProvider<T> extends SimpleCacheProvider<T> {
     private final Gson mGson = new Gson();
     private final SharedPreferences mCacheStorage = Application.getDefaultPreferences();
+
     private final String mName;
 
     public SavedCacheProvider(@NonNull String name) {
@@ -42,6 +43,12 @@ public class SavedCacheProvider<T> extends SimpleCacheProvider<T> {
     @Override
     public void remove(@NonNull T item) {
         super.remove(item);
+        save();
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
         save();
     }
 

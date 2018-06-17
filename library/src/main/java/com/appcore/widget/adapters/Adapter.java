@@ -201,8 +201,8 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
 
             notifyItemChanged(index);
 
-            if (mCacheProvider != null) {
-                mCacheProvider.add(item);
+            if (mCacheProvider != null && isItemCached(item)) {
+                mCacheProvider.update(item);
             }
         }
     }

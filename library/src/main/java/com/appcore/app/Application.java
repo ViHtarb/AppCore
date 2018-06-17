@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
-import com.google.android.gms.iid.InstanceID;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
  * Implementation of {@link android.app.Application} with static wrappers
@@ -35,7 +35,7 @@ import com.google.android.gms.iid.InstanceID;
  */
 public class Application extends android.app.Application {
 
-    private InstanceID mInstanceId;
+    private FirebaseInstanceId mInstanceId;
 
     private static Application sInstance;
     public static Application getInstance() {
@@ -65,9 +65,9 @@ public class Application extends android.app.Application {
         return LayoutInflater.from(sInstance);
     }
 
-    public static InstanceID getInstanceId() {
+    public static FirebaseInstanceId getInstanceId() {
         if (sInstance.mInstanceId == null) {
-            sInstance.mInstanceId = InstanceID.getInstance(getAppContext());
+            sInstance.mInstanceId = FirebaseInstanceId.getInstance();
         }
         return sInstance.mInstanceId;
     }

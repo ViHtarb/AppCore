@@ -1,84 +1,77 @@
 package com.appcore.sample.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.WindowCompat;
-import android.support.v4.widget.PopupWindowCompat;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.ActionMenuView;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.appcore.fragments.Fragment;
-import com.appcore.fragments.ListFragment;
 import com.appcore.sample.R;
-import com.appcore.utils.DateFormatUtils;
-import com.appcore.widget.adapters.Adapter;
-
-import junit.framework.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by Viнt@rь on 20.04.2017
  */
 public class TestFragment extends Fragment {
 
-    private final long mStartTime = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS * 30;
+    //private final long mStartTime = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS * 30;
 
     //private TestAdapter mAdapter;
 
 /*    @BindView(R.id.test_text_view)
     TextView mTestTextView;*/
 
-    @BindView(R.id.test_button)
-    Button mTestButton;
+    //@BindView(R.id.test_button)
+    //Button mTestButton;
+
+    //@BindView(R.id.test_button_2)
+    //Button mTestButton2;
+
+    //@BindView(R.id.test_view)
+    //ImageView mImageView;
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_test;
     }
 
-    @OnClick(R.id.test_button)
+    //@OnClick(R.id.test_button)
     public void onClickTest() {
-        TextView textView = new TextView(getContext());
-        textView.setText("TEST");
+        //Log.d("TEST", Utils.getInstanceId());
+
+        //final Test testObject = new Test("DEFAULT");
+        //final Test testObject2 = new Test("CUSTOM");
+
+        //SimpleCacheProvider<Test> savedCacheProvider = new SimpleCacheProvider<>();
+        //savedCacheProvider.add(testObject);
+        //savedCacheProvider.update(testObject2);
+
+
+
+
+
+/*        TextView textView = new TextView(getContext());
+        textView.setText("TEST");*/
 
         //requireActivity().getWindow().setFlags();
 
-        PopupWindow popupWindow = new PopupWindow(getContext());
+/*        PopupWindow popupWindow = new PopupWindow(getContext());
         popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setContentView(textView);
+        popupWindow.setContentView(textView);*/
 
 
 
-        popupWindow.showAsDropDown(mTestButton);
+/*        popupWindow.showAsDropDown(mTestButton);*/
 
-        WindowManager wm = (WindowManager) requireContext().getSystemService(Context.WINDOW_SERVICE);
+/*        WindowManager wm = (WindowManager) requireContext().getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams p = (WindowManager.LayoutParams) textView.getRootView().getLayoutParams();
         p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         p.dimAmount = 0.6f;
-        wm.updateViewLayout(textView.getRootView(), p);
+        wm.updateViewLayout(textView.getRootView(), p);*/
 
         //dimBehind(popupWindow);
 
@@ -87,7 +80,7 @@ public class TestFragment extends Fragment {
         mWindow.setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                 WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);*/
     }
-
+/*
     public static void dimBehind(PopupWindow popupWindow) {
         View container = popupWindow.getContentView().getRootView();
         Context context = popupWindow.getContentView().getContext();
@@ -96,7 +89,7 @@ public class TestFragment extends Fragment {
         p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         //p.dimAmount = 0.3f;
         wm.updateViewLayout(container, p);
-    }
+    }*/
 
 /*    @Override
     protected RecyclerView.Adapter getAdapter() {
@@ -702,9 +695,9 @@ public class TestFragment extends Fragment {
 
         if (days > 0) {
             if (days > 7) {
-                return DateFormatUtils.format("d MMMM, HH:ss", seconds * 1000);
+                return String.valueOf(DateFormat.format("d MMMM, HH:ss", seconds * 1000));
             }
-            return capitalize(DateFormatUtils.format("EEEE, HH:ss", seconds * 1000));
+            return capitalize(String.valueOf(DateFormat.format("EEEE, HH:ss", seconds * 1000)));
         } else if (hours > 0) {
             return getString(R.string.activity_h_ago, hours);
         } else if (minutes > 0) {
@@ -744,5 +737,36 @@ public class TestFragment extends Fragment {
             final int seconds = (int) (millis / DateUtils.SECOND_IN_MILLIS);
             return res.getQuantityString(R.plurals.duration_seconds, seconds, seconds);
         }
+    }
+
+    static final class Test {
+
+        private final int mId = 1;
+
+        private String mTest;
+
+        public Test(String test) {
+            mTest = test;
+        }
+
+        public void setTest(String test) {
+            mTest = test;
+        }
+
+        public String getTest() {
+            return mTest;
+        }
+
+/*
+        @Override
+        public int hashCode() {
+            return mId;
+        }
+*/
+
+/*        @Override
+        public boolean equals(Object obj) {
+            return ((Test) obj).mId == mId || super.equals(obj);
+        }*/
     }
 }

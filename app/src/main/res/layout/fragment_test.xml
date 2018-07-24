@@ -9,127 +9,149 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"/>
+            android:layout_height="wrap_content"/>
     </android.support.design.widget.AppBarLayout>
+<!--
+    <ProgressBar
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:indeterminate="false"
+        android:indeterminateOnly="false"
+        android:progress="20"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <android.support.v7.widget.AppCompatSeekBar
+        android:layout_width="308dp"
+        android:layout_height="222dp"
+        android:layout_marginTop="200dp"
+        android:progressDrawable="@drawable/seekbar_track_material"
 
-        <RelativeLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <com.appcore.sample.widget.view.SeekBar
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center">
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:fitsSystemWindows="true"/>
+
+    <!-- <android.support.design.chip.ChipGroup
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:singleLine="true">
+
+         <android.support.design.chip.Chip
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checkable="true"
+             app:chipText="Test"/>
+
+         <android.support.design.chip.Chip
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checkable="true"
+             app:chipText="Test"/>
+
+         <android.support.design.chip.Chip
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checkable="true"
+             app:chipText="Test"/>
+
+         <android.support.design.chip.Chip
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checkable="true"
+             app:chipText="Test"/>
+
+     </android.support.design.chip.ChipGroup>-->
+
+
+<!--            <Button
+                android:id="@+id/test_button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Test"/>-->
+
+    <!--
+            <android.support.design.button.MaterialButton
+                android:id="@+id/test_button"
+                android:layout_width="85dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="Test"
+                android:textColor="@color/colorPrimary"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="24dp"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp"/>
+    -->
+
+
+    <!--        <android.support.v7.widget.RecyclerView
+                android:id="@id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>-->
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    <!--
+            <TextView
+                android:id="@+id/test_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="50dp"/>
+    -->
+
+    <!--        <Button
+                android:id="@+id/test_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="100dp"/>
 
-            <!-- <android.support.design.chip.ChipGroup
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 app:singleLine="true">
+            <ImageView
+                android:id="@+id/test_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_heart"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="70dp"
+                android:layout_marginBottom="10dp"/>
 
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
+            <Button
+                android:id="@+id/test_button_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_gravity="bottom"/>-->
 
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
-
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
-
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
-
-             </android.support.design.chip.ChipGroup>-->
-
-
-            <!--
-                    <Button
-                        android:id="@+id/test_button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Test"/>
-            -->
-
-            <!--
-                    <android.support.design.button.MaterialButton
-                        android:id="@+id/test_button"
-                        android:layout_width="85dp"
-                        android:layout_height="48dp"
-                        android:gravity="center"
-                        android:text="Test"
-                        android:textColor="@color/colorPrimary"
-                        app:backgroundTint="@android:color/transparent"
-                        app:cornerRadius="24dp"
-                        app:strokeColor="@color/colorPrimary"
-                        app:strokeWidth="2dp"/>
-            -->
-
-
-            <!--        <android.support.v7.widget.RecyclerView
-                        android:id="@id/recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>-->
-        </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
-
-<!--
-        <TextView
-            android:id="@+id/test_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="50dp"/>
--->
-
-<!--        <Button
-            android:id="@+id/test_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="100dp"/>
-
-        <ImageView
-            android:id="@+id/test_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_heart"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="70dp"
-            android:layout_marginBottom="10dp"/>
-
-        <Button
-            android:id="@+id/test_button_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_gravity="bottom"/>-->
-
-<!--        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"/>-->
+    <!--        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"/>-->
 </android.support.design.widget.CoordinatorLayout>

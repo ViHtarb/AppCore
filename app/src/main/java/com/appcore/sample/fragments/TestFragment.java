@@ -2,6 +2,9 @@ package com.appcore.sample.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 
@@ -11,6 +14,8 @@ import com.appcore.sample.R;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import butterknife.OnClick;
 
 /**
  * Created by Viнt@rь on 20.04.2017
@@ -35,6 +40,8 @@ public class TestFragment extends Fragment {
 
     @Override
     protected int getLayoutId() {
+        //VectorDrawableCompat drawable = VectorDrawableCompat.create(getResources(), R.drawable.bg_circle, null);
+        //drawable.getBounds();
         return R.layout.fragment_test;
     }
 

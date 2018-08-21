@@ -1,71 +1,40 @@
 package com.appcore.net;
 
-import android.support.annotation.NonNull;
-
 import com.squareup.otto.Bus;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.annotation.NonNull;
 
 /**
  * Created by Viнt@rь on 16.05.2016
  */
 public abstract class Network {
-    private static final Bus sBus = new Bus();
-    private static final List<Object> sRegistered = new ArrayList<>();
+    private static final Bus BUS = new Bus();
 
     /**
-     * Register handler for events
-     */
-    public static synchronized void register(@NonNull Object object) {
-        if (!isRegistered(object)) {
-            sRegistered.add(object);
-            sBus.register(object);
-        }
-    }
-
-    /**
-     * Unregister handler from events
+     * Registers all handler methods on {@code object} to receive events and producer methods to provide events.
      *
-     * <p>
-     * Don`t forget unregister registered objects
-     * <p/>
+     * @see Bus#register(Object)
      */
-    public static synchronized void unregister(@NonNull Object object) {
-        if (isRegistered(object)) {
-            sRegistered.remove(object);
-            sBus.unregister(object);
-        }
+    public static void register(@NonNull Object object) {
+        BUS.register(object);
     }
 
     /**
-     * Check is object registered for events
-     */
-    public static synchronized boolean isRegistered(@NonNull Object object) {
-        return sRegistered.contains(object);
-    }
-
-    /**
-     * Check is class registered for events
-     */
-    public static synchronized boolean isRegistered(@NonNull Class clazz) {
-        for (Object object : sRegistered) {
-            Class objectClass = object.getClass();
-            if (objectClass.equals(clazz)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Post events to all registered handlers.
+     * Unregisters all producer and handler methods on a registered {@code object}.
      *
-     * <p>
-     * See {@link Bus#post(Object)} for more details.
-     * </p>
+     * @see Bus#unregister(Object)
+     */
+    public static void unregister(@NonNull Object object) {
+        BUS.unregister(object);
+    }
+
+    /**
+     * Posts an event to all registered handlers. This method will return successfully after the event has been posted to
+     * all handlers, and regardless of any exceptions thrown by handlers.
+     *
+     * @see Bus#post(Object)
      */
     protected void post(Object event) {
-        sBus.post(event);
+        BUS.post(event);
     }
 }

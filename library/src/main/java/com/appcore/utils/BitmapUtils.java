@@ -2,10 +2,11 @@ package com.appcore.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
+import androidx.annotation.NonNull;
 
 /**
  * Bitmap util contains helpers

@@ -1,17 +1,18 @@
 package com.appcore.app;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
 import com.appcore.fragments.PageFragment;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 /**
- * Base implementation of {@link android.support.v4.app.FragmentPagerAdapter} with
+ * Base implementation of {@link androidx.fragment.app.FragmentPagerAdapter} with
  * implemented {@link #getPageTitle(int)} method for fragments that are
  * an {@link PageFragment} interface implementation.
  */
-public abstract class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
+public abstract class FragmentPagerAdapter extends androidx.fragment.app.FragmentPagerAdapter {
 
     private final Context mContext;
 

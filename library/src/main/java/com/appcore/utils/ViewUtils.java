@@ -1,8 +1,9 @@
 package com.appcore.utils;
 
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by Viнt@rь on 05.10.2016

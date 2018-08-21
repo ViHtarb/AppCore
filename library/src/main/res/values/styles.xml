@@ -1,22 +1,22 @@
 <resources>
 
     <!--Base themes for app-->
-    <style name="Base.V7.Theme.AppCore" parent="Theme.AppCompat.NoActionBar">
+    <style name="Base.V14.Theme.AppCore" parent="Theme.MaterialComponents.NoActionBar">
         <item name="toolbarStyle">@style/Widget.AppCore.Toolbar</item>
     </style>
 
-    <style name="Base.V7.Theme.AppCore.Light" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.V14.Theme.AppCore.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="toolbarStyle">@style/Widget.AppCore.Toolbar</item>
     </style>
 
-    <style name="Base.Theme.AppCore" parent="Base.V7.Theme.AppCore"/>
-    <style name="Base.Theme.AppCore.Light" parent="Base.V7.Theme.AppCore.Light"/>
+    <style name="Base.Theme.AppCore" parent="Base.V14.Theme.AppCore"/>
+    <style name="Base.Theme.AppCore.Light" parent="Base.V14.Theme.AppCore.Light"/>
 
     <style name="Theme.AppCore" parent="Base.Theme.AppCore"/>
     <style name="Theme.AppCore.Light" parent="Base.Theme.AppCore.Light"/>
     <!--Base themes for app-->
 
-    <style name="Widget.AppCore.Toolbar" parent="Widget.AppCompat.Toolbar">
+    <style name="Widget.AppCore.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:id">@id/toolbar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>

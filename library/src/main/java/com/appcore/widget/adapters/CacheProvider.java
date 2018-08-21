@@ -1,8 +1,8 @@
 package com.appcore.widget.adapters;
 
-import android.support.annotation.NonNull;
-
 import java.util.Collection;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by Viнt@rь on 24.08.2016

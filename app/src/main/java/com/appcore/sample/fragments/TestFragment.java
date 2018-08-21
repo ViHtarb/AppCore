@@ -2,9 +2,6 @@ package com.appcore.sample.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 
@@ -17,14 +14,13 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.OnClick;
 
+
 /**
  * Created by Viнt@rь on 20.04.2017
  */
 public class TestFragment extends Fragment {
 
     //private final long mStartTime = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS * 30;
-
-    //private TestAdapter mAdapter;
 
 /*    @BindView(R.id.test_text_view)
     TextView mTestTextView;*/
@@ -40,12 +36,10 @@ public class TestFragment extends Fragment {
 
     @Override
     protected int getLayoutId() {
-        //VectorDrawableCompat drawable = VectorDrawableCompat.create(getResources(), R.drawable.bg_circle, null);
-        //drawable.getBounds();
         return R.layout.fragment_test;
     }
 
-    //@OnClick(R.id.test_button)
+    @OnClick(R.id.test_button)
     public void onClickTest() {
         //Log.d("TEST", Utils.getInstanceId());
 
@@ -72,7 +66,7 @@ public class TestFragment extends Fragment {
 
 
 
-/*        popupWindow.showAsDropDown(mTestButton);*/
+        /*        popupWindow.showAsDropDown(mTestButton);*/
 
 /*        WindowManager wm = (WindowManager) requireContext().getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams p = (WindowManager.LayoutParams) textView.getRootView().getLayoutParams();
@@ -98,73 +92,6 @@ public class TestFragment extends Fragment {
         wm.updateViewLayout(container, p);
     }*/
 
-/*    @Override
-    protected RecyclerView.Adapter getAdapter() {
-        if (mAdapter == null) {
-            mAdapter = new TestAdapter(getContext());
-
-            for (int i = 0; i < 100; i++) {
-                mAdapter.add(new TestObject());
-            }
-
-            Collection<TestObject> integers = new ArrayList<>();
-
-            mAdapter.add(integers);
-        }
-        return mAdapter;
-    }*/
-
-/*    static final class TestObject {
-
-    }*/
-
- /*   final class MyItemDetailsLookup extends ItemDetailsLookup {
-
-        private final RecyclerView mRecyclerView;
-
-        MyItemDetailsLookup(RecyclerView recyclerView) {
-            mRecyclerView = recyclerView;
-        }
-
-        public ItemDetails getItemDetails(MotionEvent e) {
-            View view = mRecyclerView.findChildViewUnder(e.getX(), e.getY());
-            if (view != null) {
-                RecyclerView.ViewHolder holder = mRecyclerView.getChildViewHolder(view);
-                if (holder instanceof TestAdapter.TestViewHolder) {
-                    return (((TestAdapter.TestViewHolder) holder).getItemDetails());
-                }
-            }
-            return null;
-        }
-    }*/
-/*
-    static final class TestAdapter<T extends TestObject> extends Adapter<TestAdapter.TestViewHolder, T> {
-
-        final class TestViewHolder extends Adapter.ViewHolder {
-
-            @BindView(R.id.text_view)
-            TextView mTextView;
-
-            public TestViewHolder(View itemView) {
-                super(itemView);
-            }
-        }
-
-        public TestAdapter(@NonNull Context context) {
-            super(context);
-        }
-
-        @NonNull
-        @Override
-        public TestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new TestViewHolder(getInflater().inflate(R.layout.item_layout_test, parent, false));
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull TestViewHolder holder, int position) {
-            holder.mTextView.setText("Position = " + position);
-        }
-    }*/
 
 /*    @Override
     public void onResume() {
@@ -190,9 +117,8 @@ public class TestFragment extends Fragment {
     }
 */
 
-    //@OnClick(R.id.test_button)
+    @OnClick(R.id.test_button_2)
     public void onTestClick() {
-
 /*        Log.d("TEST", String.valueOf(DateUtils.getRelativeTimeSpanString(mStartTime, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS,
                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL)));
 
@@ -746,23 +672,51 @@ public class TestFragment extends Fragment {
         }
     }
 
-    static final class Test {
+    /*static final class Test implements Parcelable {
+*//*
 
         private final int mId = 1;
+*//*
+*//*
 
         private String mTest;
+*//*
 
         public Test(String test) {
-            mTest = test;
+            //mTest = test;
         }
 
+        protected Test(Parcel in) {
+        }
+
+        public static final Creator<Test> CREATOR = new Creator<Test>() {
+            @Override
+            public Test createFromParcel(Parcel in) {
+                return new Test(in);
+            }
+
+            @Override
+            public Test[] newArray(int size) {
+                return new Test[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+        }*/
+/*
         public void setTest(String test) {
             mTest = test;
         }
 
         public String getTest() {
             return mTest;
-        }
+        }*/
 
 /*
         @Override
@@ -775,5 +729,5 @@ public class TestFragment extends Fragment {
         public boolean equals(Object obj) {
             return ((Test) obj).mId == mId || super.equals(obj);
         }*/
-    }
+    //}
 }

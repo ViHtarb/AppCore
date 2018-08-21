@@ -2,25 +2,25 @@ package com.appcore.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appcore.R;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Base implementation of {@link android.support.v4.app.Fragment} with using {@link ButterKnife}
+ * Base implementation of {@link androidx.fragment.app.Fragment} with using {@link ButterKnife}
  *
  * <p>
  * For using this fragment implementation your activity must be extend {@link AppCompatActivity}
@@ -50,7 +50,7 @@ import butterknife.Unbinder;
  *  <li> Fragment is destroyed
  * </ul>
  */
-public abstract class Fragment extends android.support.v4.app.Fragment {
+public abstract class Fragment extends androidx.fragment.app.Fragment {
     private AppCompatActivity mActivity;
 
     @Nullable

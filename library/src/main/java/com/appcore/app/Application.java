@@ -9,13 +9,14 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationManagerCompat;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import androidx.core.app.NotificationManagerCompat;
 
 /**
  * Implementation of {@link android.app.Application} with static wrappers

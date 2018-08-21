@@ -1,7 +1,6 @@
 package com.appcore.utils;
 
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 
@@ -10,6 +9,8 @@ import com.appcore.app.Application;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by Viнt@rь on 06.07.2016

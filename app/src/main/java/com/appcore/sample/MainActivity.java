@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onStop() {
-        super.onStop();
         Network.unregister(this);
+        super.onStop();
     }
 }

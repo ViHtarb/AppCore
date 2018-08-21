@@ -1,18 +1,19 @@
 package com.appcore.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appcore.R;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by Viнt@rь on 18.04.2016
@@ -74,7 +75,7 @@ public abstract class PagerFragment extends Fragment {
     protected void onPageSelected(int position) {
         PagerAdapter adapter = getAdapter();
         if (adapter instanceof FragmentPagerAdapter || adapter instanceof FragmentStatePagerAdapter) {
-            android.support.v4.app.Fragment fragment;
+            androidx.fragment.app.Fragment fragment;
             if (adapter instanceof FragmentPagerAdapter) {
                 fragment = ((FragmentPagerAdapter) adapter).getItem(position);
             } else {

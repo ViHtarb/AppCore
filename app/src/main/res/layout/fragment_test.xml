@@ -59,7 +59,6 @@
                 android:id="@+id/test_button_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
                 android:text="1"
                 app:backgroundTint="@android:color/transparent"
                 app:strokeColor="@color/colorPrimary"

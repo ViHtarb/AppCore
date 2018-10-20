@@ -9,11 +9,14 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationManagerCompat;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import androidx.core.app.NotificationManagerCompat;
 
 /**
  * Implementation of {@link android.app.Application} with static wrappers
@@ -32,6 +35,8 @@ import android.view.inputmethod.InputMethodManager;
  * </p>
  */
 public class Application extends android.app.Application {
+
+    private FirebaseInstanceId mInstanceId;
 
     private static Application sInstance;
     public static Application getInstance() {
@@ -59,6 +64,13 @@ public class Application extends android.app.Application {
 
     public static LayoutInflater getInflater() {
         return LayoutInflater.from(sInstance);
+    }
+
+    public static FirebaseInstanceId getInstanceId() {
+        if (sInstance.mInstanceId == null) {
+            sInstance.mInstanceId = FirebaseInstanceId.getInstance();
+        }
+        return sInstance.mInstanceId;
     }
 
     public static SharedPreferences getDefaultPreferences() {

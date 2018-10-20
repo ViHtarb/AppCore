@@ -1,17 +1,19 @@
 package com.appcore.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appcore.R;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by Viнt@rь on 18.04.2016
@@ -23,22 +25,37 @@ public abstract class PagerFragment extends Fragment {
     protected ViewPager mViewPager;
 
     @Override
-    public int getLayoutId() {
+    protected int getLayoutId() {
         return R.layout.fragment_pager;
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         if (view != null) {
-            mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-            mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
+            mTabLayout = view.findViewById(R.id.tab_layout);
+            mViewPager = view.findViewById(R.id.view_pager);
 
             if (mViewPager != null) {
                 mViewPager.setAdapter(getAdapter());
-                mViewPager.addOnPageChangeListener(new OnPageChangedListener());
+                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        PagerFragment.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        PagerFragment.this.onPageSelected(position);
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                        PagerFragment.this.onPageScrollStateChanged(state);
+                    }
+                });
             } else {
                 throw new IllegalStateException("Required view 'R.id.view_pager' with ID " + R.id.view_pager + " for field 'mViewPager' was not found.");
             }
@@ -58,14 +75,14 @@ public abstract class PagerFragment extends Fragment {
     protected void onPageSelected(int position) {
         PagerAdapter adapter = getAdapter();
         if (adapter instanceof FragmentPagerAdapter || adapter instanceof FragmentStatePagerAdapter) {
-            android.support.v4.app.Fragment fragment;
+            androidx.fragment.app.Fragment fragment;
             if (adapter instanceof FragmentPagerAdapter) {
                 fragment = ((FragmentPagerAdapter) adapter).getItem(position);
             } else {
                 fragment = ((FragmentStatePagerAdapter) adapter).getItem(position);
             }
 
-            if (fragment != null && fragment instanceof PageFragment) {
+            if (fragment instanceof PageFragment) {
                 ((PageFragment) fragment).onSelected();
             }
         }
@@ -76,22 +93,4 @@ public abstract class PagerFragment extends Fragment {
     }
 
     protected abstract PagerAdapter getAdapter();
-
-    private final class OnPageChangedListener implements ViewPager.OnPageChangeListener {
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            PagerFragment.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            PagerFragment.this.onPageSelected(position);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            PagerFragment.this.onPageScrollStateChanged(state);
-        }
-    }
 }

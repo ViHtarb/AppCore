@@ -1,37 +1,104 @@
 package com.appcore.sample.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.appcore.fragments.Fragment;
 import com.appcore.sample.R;
-import com.appcore.utils.DateFormatUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.BindView;
 import butterknife.OnClick;
+
 
 /**
  * Created by Viнt@rь on 20.04.2017
  */
 public class TestFragment extends Fragment {
 
-    private final long mStartTime = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS * 30;
+    //private final long mStartTime = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS * 30;
 
-    @BindView(R.id.test_text_view)
-    TextView mTestTextView;
+/*    @BindView(R.id.test_text_view)
+    TextView mTestTextView;*/
+
+    //@BindView(R.id.test_button)
+    //Button mTestButton;
+
+    //@BindView(R.id.test_button_2)
+    //Button mTestButton2;
+
+    //@BindView(R.id.test_view)
+    //ImageView mImageView;
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_test;
     }
+
+    @OnClick(R.id.test_button)
+    public void onClickTest() {
+        //Log.d("TEST", Utils.getInstanceId());
+
+        //final Test testObject = new Test("DEFAULT");
+        //final Test testObject2 = new Test("CUSTOM");
+
+        //SimpleCacheProvider<Test> savedCacheProvider = new SimpleCacheProvider<>();
+        //savedCacheProvider.add(testObject);
+        //savedCacheProvider.update(testObject2);
+
+
+
+
+
+/*        TextView textView = new TextView(getContext());
+        textView.setText("TEST");*/
+
+        //requireActivity().getWindow().setFlags();
+
+/*        PopupWindow popupWindow = new PopupWindow(getContext());
+        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setContentView(textView);*/
+
+
+
+        /*        popupWindow.showAsDropDown(mTestButton);*/
+
+/*        WindowManager wm = (WindowManager) requireContext().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams p = (WindowManager.LayoutParams) textView.getRootView().getLayoutParams();
+        p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        p.dimAmount = 0.6f;
+        wm.updateViewLayout(textView.getRootView(), p);*/
+
+        //dimBehind(popupWindow);
+
+
+/*
+        mWindow.setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+                WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);*/
+    }
+/*
+    public static void dimBehind(PopupWindow popupWindow) {
+        View container = popupWindow.getContentView().getRootView();
+        Context context = popupWindow.getContentView().getContext();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
+        p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        //p.dimAmount = 0.3f;
+        wm.updateViewLayout(container, p);
+    }*/
+
+
+/*    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d("TEST", "TEST2 " + System.currentTimeMillis());
+    }*/
 
     /*
     @Nullable
@@ -50,7 +117,7 @@ public class TestFragment extends Fragment {
     }
 */
 
-    @OnClick(R.id.test_button)
+    @OnClick(R.id.test_button_2)
     public void onTestClick() {
 /*        Log.d("TEST", String.valueOf(DateUtils.getRelativeTimeSpanString(mStartTime, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS,
                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL)));
@@ -60,10 +127,38 @@ public class TestFragment extends Fragment {
         Log.d("TEST", getResources().getQuantityString(R.plurals.activity_favorite, 1));
         Log.d("TEST", String.format(getResources().getQuantityString(R.plurals.activity_favorite, 10), "andre and 10"));*/
         //Log.d("TEST", getResources().getQuantityString(R.plurals.activity_favorite, 10));
+/*
 
         Log.d("TEST", String.valueOf(DateFormat.getTimeFormat(getContext()).format(new Date(System.currentTimeMillis()))));
         //Log.d("TEST", String.valueOf(DateFormat.getTimeFormatString());
         Log.d("TEST", String.valueOf(DateFormat.format(DateFormatUtils.DATE_PATTERN, System.currentTimeMillis())));
+
+
+
+        Log.d("TEST", String.valueOf(formatDuration(DateUtils.HOUR_IN_MILLIS * 101)));
+
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < 1000000; i++) {
+            TimeUnit.DAYS.toMillis(TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()));
+        }
+
+        Log.d("TEST", "elapsed Time = " + (System.currentTimeMillis() - startTime));
+
+        startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < 1000000; i++) {
+            long date = System.currentTimeMillis() - System.currentTimeMillis() % 86400000;
+        }
+
+        Log.d("TEST", "elapsed Time 2 = " + (System.currentTimeMillis() - startTime));
+*/
+
+/*        DateTimeUtils;
+        DateTimeFormatUtils;
+        TimeFormatUtils;
+        TimeFormat;*/
+
         //Log.d("TEST", String.valueOf(DateFormat.format("d MMMM, HH:mm", System.currentTimeMillis())));
         //Log.d("TEST", String.valueOf(DateFormat.format("d MMMM, HH:mm", System.currentTimeMillis())));
         /*
@@ -490,7 +585,10 @@ public class TestFragment extends Fragment {
         Log.d("TEST", "---------------------------------------------------------------------");*/
     }
 
+    @SuppressLint("ConstantLocale")
     private static final SimpleDateFormat WEEK_FORMAT = new SimpleDateFormat("d MMMM, HH:mm", Locale.getDefault());
+
+    @SuppressLint("ConstantLocale")
     private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("EEEE, HH:mm", Locale.getDefault());
 
     protected String formatTimeNew(long milliseconds) {
@@ -530,9 +628,9 @@ public class TestFragment extends Fragment {
 
         if (days > 0) {
             if (days > 7) {
-                return DateFormatUtils.format("d MMMM, HH:ss", seconds * 1000);
+                return String.valueOf(DateFormat.format("d MMMM, HH:ss", seconds * 1000));
             }
-            return capitalize(DateFormatUtils.format("EEEE, HH:ss", seconds * 1000));
+            return capitalize(String.valueOf(DateFormat.format("EEEE, HH:ss", seconds * 1000)));
         } else if (hours > 0) {
             return getString(R.string.activity_h_ago, hours);
         } else if (minutes > 0) {
@@ -559,15 +657,77 @@ public class TestFragment extends Fragment {
 
     public CharSequence formatDuration(long millis) {
         final Resources res = getResources();
-/*        if (millis >= DateUtils.HOUR_IN_MILLIS) {
-            final int hours = (int) ((millis + 1800000) / DateUtils.HOUR_IN_MILLIS);
+        if (millis >= DateUtils.WEEK_IN_MILLIS) {
+            final int weeks = (int) (millis / DateUtils.WEEK_IN_MILLIS);
+            return res.getQuantityString(R.plurals.duration_weeks, weeks, weeks);
+        } else if (millis >= DateUtils.HOUR_IN_MILLIS) {
+            final int hours = (int) (millis / DateUtils.HOUR_IN_MILLIS);
             return res.getQuantityString(R.plurals.duration_hours, hours, hours);
         } else if (millis >= DateUtils.MINUTE_IN_MILLIS) {
-            final int minutes = (int) ((millis + 30000) / DateUtils.MINUTE_IN_MILLIS);
+            final int minutes = (int) (millis / DateUtils.MINUTE_IN_MILLIS);
             return res.getQuantityString(R.plurals.duration_minutes, minutes, minutes);
-        } else {*/
-            final int seconds = (int) ((millis + 500) / DateUtils.SECOND_IN_MILLIS);
+        } else {
+            final int seconds = (int) (millis / DateUtils.SECOND_IN_MILLIS);
             return res.getQuantityString(R.plurals.duration_seconds, seconds, seconds);
-        //}
+        }
     }
+
+    /*static final class Test implements Parcelable {
+*//*
+
+        private final int mId = 1;
+*//*
+*//*
+
+        private String mTest;
+*//*
+
+        public Test(String test) {
+            //mTest = test;
+        }
+
+        protected Test(Parcel in) {
+        }
+
+        public static final Creator<Test> CREATOR = new Creator<Test>() {
+            @Override
+            public Test createFromParcel(Parcel in) {
+                return new Test(in);
+            }
+
+            @Override
+            public Test[] newArray(int size) {
+                return new Test[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+        }*/
+/*
+        public void setTest(String test) {
+            mTest = test;
+        }
+
+        public String getTest() {
+            return mTest;
+        }*/
+
+/*
+        @Override
+        public int hashCode() {
+            return mId;
+        }
+*/
+
+/*        @Override
+        public boolean equals(Object obj) {
+            return ((Test) obj).mId == mId || super.equals(obj);
+        }*/
+    //}
 }

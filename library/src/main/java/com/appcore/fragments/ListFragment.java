@@ -1,14 +1,16 @@
 package com.appcore.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appcore.R;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * Base implementation of {@link Fragment} with implemented binding
@@ -45,15 +47,20 @@ public abstract class ListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         if (view != null) {
-            mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
-            mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+            mRefreshLayout = view.findViewById(R.id.refresh_layout);
+            mRecyclerView = view.findViewById(R.id.recycler_view);
 
             if (mRefreshLayout != null) {
-                mRefreshLayout.setOnRefreshListener(new OnRefreshListener());
+                mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        ListFragment.this.onRefresh();
+                    }
+                });
             }
 
             if (mRecyclerView != null) {
@@ -66,39 +73,21 @@ public abstract class ListFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        refresh();
-    }
-
-    protected void refresh() {
+    protected void onRefresh() {
 
     }
 
     /**
-     * Notify the widget that refresh state has changed to refreshing.
+     * Notify the {@link SwipeRefreshLayout}(if present in layout) that refresh state has changed. Do not call this when
+     * refresh is triggered by a swipe gesture.
      *
      * <p>
      * See {@link SwipeRefreshLayout#setRefreshing(boolean)} for more details.
      * </p>
      */
-    protected void enableRefreshing() {
+    protected void setRefreshing(boolean refreshing) {
         if (mRefreshLayout != null) {
-            mRefreshLayout.setRefreshing(true);
-        }
-    }
-
-    /**
-     * Notify the widget that refresh state has changed to stop refreshing.
-     *
-     * <p>
-     * See {@link SwipeRefreshLayout#setRefreshing(boolean)} for more details.
-     * </p>
-     */
-    protected void disableRefreshing() {
-        if (mRefreshLayout != null) {
-            mRefreshLayout.setRefreshing(false);
+            mRefreshLayout.setRefreshing(refreshing);
         }
     }
 
@@ -106,12 +95,4 @@ public abstract class ListFragment extends Fragment {
      * Return the adapter extend {@link RecyclerView.Adapter}.
      */
     protected abstract RecyclerView.Adapter getAdapter();
-
-    private final class OnRefreshListener implements SwipeRefreshLayout.OnRefreshListener {
-
-        @Override
-        public void onRefresh() {
-            ListFragment.this.refresh();
-        }
-    }
 }

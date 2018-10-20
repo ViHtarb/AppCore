@@ -3,14 +3,6 @@ package com.appcore.widget.adapters;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.CallSuper;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -18,13 +10,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
 /**
  * Created by Viнt@rь on 06.11.2015
+ *
+ * TODO think about remove {@link Adapter#sort()} and {@link Adapter#getComparator()} methods
+ * TODO think about add item update(index) method
+ * TODO think about applying cache data if cache provider is presents
  */
 public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends RecyclerView.Adapter<VH> {
     private final Context mContext;
@@ -87,13 +90,17 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
     }
 
     public Adapter(@NonNull Context context) {
+        this(context, null);
+    }
+
+    public Adapter(@NonNull Context context, CacheProvider<T> cacheProvider) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
-        mCacheProvider = getCacheProvider();
+        mCacheProvider = cacheProvider;
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         mRecyclerView = recyclerView;
     }
@@ -177,15 +184,13 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
         notifyDataSetChanged();
 
         if (mCacheProvider != null) {
-            Iterator<T> iterator;
-            for (iterator = items.iterator(); iterator.hasNext(); ) {
-                T item = iterator.next();
-                if (!isItemCacheble(item)) {
-                    iterator.remove();
+            List<T> cachebleItems = new ArrayList<>();
+            for (T item : items) {
+                if (isItemCacheble(item)) {
+                    cachebleItems.add(item);
                 }
             }
-
-            mCacheProvider.add(items);
+            mCacheProvider.add(cachebleItems);
         }
     }
 
@@ -196,8 +201,8 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
 
             notifyItemChanged(index);
 
-            if (mCacheProvider != null) {
-                mCacheProvider.add(item);
+            if (mCacheProvider != null && isItemCached(item)) {
+                mCacheProvider.update(item);
             }
         }
     }
@@ -241,12 +246,17 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
     }
 
     @Nullable
-    protected CacheProvider<T> getCacheProvider() {
-        return null;
+    @SuppressWarnings("unchecked")
+    protected <CP extends CacheProvider<T>> CP getCacheProvider() {
+        return (CP) mCacheProvider;
     }
 
+    /**
+     * @deprecated This method not longer needed.
+     */
     @Nullable
     @SuppressWarnings("unchecked")
+    @Deprecated
     protected VH getViewHolder(int position) {
         return (VH) mRecyclerView.findViewHolderForAdapterPosition(position);
     }

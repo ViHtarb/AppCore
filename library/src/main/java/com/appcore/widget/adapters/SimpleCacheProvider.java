@@ -1,12 +1,12 @@
 package com.appcore.widget.adapters;
 
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by Viнt@rь on 24.08.2016
@@ -21,7 +21,7 @@ public class SimpleCacheProvider<T> implements CacheProvider<T> {
 
     @Override
     public boolean contains(@NonNull T item) {
-        return mCache.contains(item);
+        return !isEmpty() && mCache.contains(item);
     }
 
     @Override
@@ -40,8 +40,21 @@ public class SimpleCacheProvider<T> implements CacheProvider<T> {
     }
 
     @Override
+    public void update(@NonNull T item) {
+        if (contains(item)) {
+            mCache.remove(item);
+            mCache.add(item);
+        }
+    }
+
+    @Override
     public void remove(@NonNull T item) {
         mCache.remove(item);
+    }
+
+    @Override
+    public void clear() {
+        mCache.clear();
     }
 
     @Override

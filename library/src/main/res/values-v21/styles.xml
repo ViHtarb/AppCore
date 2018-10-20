@@ -2,22 +2,23 @@
 <resources>
 
     <!--Base themes for app-->
-    <style name="AppTheme" parent="Base.AppTheme">
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="Base.V21.Theme.AppCore" parent="Base.V14.Theme.AppCore">
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="buttonStyle">@style/Widget.Button</item>
+        <item name="editTextBackground">@drawable/edit_text_material</item>
+        <item name="buttonStyle">@style/Widget.AppCore.Button</item>
     </style>
 
-    <style name="AppTheme.Light" parent="Base.AppTheme.Light">
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="Base.V21.Theme.AppCore.Light" parent="Base.V14.Theme.AppCore.Light">
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="buttonStyle">@style/Widget.Button</item>
+        <item name="editTextBackground">@drawable/edit_text_material</item>
+        <item name="buttonStyle">@style/Widget.AppCore.Button</item>
     </style>
+
+    <style name="Base.Theme.AppCore" parent="Base.V21.Theme.AppCore"/>
+    <style name="Base.Theme.AppCore.Light" parent="Base.V21.Theme.AppCore.Light"/>
     <!--Base themes for app-->
 
-    <style name="Widget.Button" parent="Widget.AppCompat.Button">
+    <style name="Widget.AppCore.Button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/btn_default_material</item>
     </style>
 </resources>

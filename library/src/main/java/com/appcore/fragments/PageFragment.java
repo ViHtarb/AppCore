@@ -1,14 +1,15 @@
 package com.appcore.fragments;
 
-import android.support.annotation.StringRes;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by Viнt@rь on 08.04.2016
  */
 public interface PageFragment {
 
-    @StringRes
-    int getTitle();
+    CharSequence getTitle(@NonNull Context context);
 
-    void onSelected();
+    void onSelected(); // TODO in java 8 implement this method
 }

@@ -23,8 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
     testImplementation 'junit:junit:' + rootProject.ext.junitVersion
     implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidxLibraryVersion
     implementation 'androidx.recyclerview:recyclerview-selection:' + rootProject.ext.androidxLibraryVersion

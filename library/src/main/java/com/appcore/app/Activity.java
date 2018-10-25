@@ -52,7 +52,10 @@ public abstract class Activity extends AppCompatActivity {
      * </p>
      *
      * @param fragment The new fragment to place in the container.
+     *
+     * @deprecated Use <a href="https://developer.android.com/topic/libraries/architecture/navigation/">Navigation Architecture Component</a> instead.
      */
+    @Deprecated
     protected void openFragment(@NonNull Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();

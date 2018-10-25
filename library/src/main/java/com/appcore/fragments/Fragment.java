@@ -77,22 +77,11 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
         mUnBinder = ButterKnife.bind(this, view);
 
         mToolbar = view.findViewById(R.id.toolbar);
-
         if (mToolbar != null) {
             mActivity.setSupportActionBar(mToolbar);
-            ActionBar actionBar = mActivity.getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
         }
 
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -100,6 +89,26 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnBinder.unbind();
+    }
+
+    /**
+     * Set whether home should be displayed as an "up" affordance.
+     * Set this to true if selecting "home" returns up by a single level in your UI
+     * rather than back to the top level or front page.
+     *
+     * <p>To set several display options at once, see the setDisplayOptions methods.
+     *
+     * @param showHomeAsUp true to show the user that selecting home will return one
+     *                     level up rather than to the top level of the app.
+     *
+     * @see ActionBar#setDisplayOptions(int)
+     * @see ActionBar#setDisplayOptions(int, int)
+     */
+    protected void setDisplayHomeAsUpEnabled(boolean showHomeAsUp) {
+        ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(showHomeAsUp);
+        }
     }
 
     /**

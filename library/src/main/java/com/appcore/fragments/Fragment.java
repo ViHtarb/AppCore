@@ -59,7 +59,7 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
     private Unbinder mUnBinder;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         if (context instanceof AppCompatActivity) {
             super.onAttach(context);
             mActivity = (AppCompatActivity) context;

@@ -51,25 +51,18 @@ public abstract class ListFragment extends Fragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         if (view != null) {
-            mRefreshLayout = view.findViewById(R.id.refresh_layout);
             mRecyclerView = view.findViewById(R.id.recycler_view);
-
-            if (mRefreshLayout != null) {
-                mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        ListFragment.this.onRefresh();
-                    }
-                });
-            }
-
             if (mRecyclerView != null) {
                 mRecyclerView.setAdapter(getAdapter());
             } else {
                 throw new IllegalStateException("Required view 'R.id.recycler_view' with ID " + R.id.recycler_view + " for field 'mRecyclerView' was not found.");
             }
-        }
 
+            mRefreshLayout = view.findViewById(R.id.refresh_layout);
+            if (mRefreshLayout != null) {
+                mRefreshLayout.setOnRefreshListener(this::onRefresh);
+            }
+        }
         return view;
     }
 

@@ -6,8 +6,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0-alpha02'
-        classpath 'com.google.gms:google-services:4.1.0'
+        classpath 'com.android.tools.build:gradle:3.4.0-alpha07'
+        classpath 'com.google.gms:google-services:4.2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -31,12 +31,11 @@ ext {
     minSdkVersion = 14
     targetSdkVersion = 28
 
-    //supportLibraryVersion = "28.0.0-beta1"
-    //playServicesVersion = "15.0.1"
-    androidxLibraryVersion = "1.0.0"
-    firebaseCoreLibraryVersion = "16.0.4"
+    androidxLibraryVersion = "1.1.0-alpha01"
+    materialLibraryVersion = "1.1.0-alpha01"
+    firebaseCoreLibraryVersion = "16.0.6"
 
-    butterKnifeVersion = "9.0.0-rc1"
+    butterKnifeVersion = "9.0.0-rc2"
 
     gsonVersion = "2.8.5"
 

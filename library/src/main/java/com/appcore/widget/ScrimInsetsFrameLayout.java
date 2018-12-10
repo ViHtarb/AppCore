@@ -23,7 +23,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.appcore.R;
@@ -57,23 +56,19 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
         a.recycle();
         setWillNotDraw(true); // No need to draw until the insets are adjusted
 
-        ViewCompat.setOnApplyWindowInsetsListener(this,
-                new androidx.core.view.OnApplyWindowInsetsListener() {
-                    @Override
-                    public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
-                        if (null == mInsets) {
-                            mInsets = new Rect();
-                        }
-                        mInsets.set(insets.getSystemWindowInsetLeft(),
-                                insets.getSystemWindowInsetTop(),
-                                insets.getSystemWindowInsetRight(),
-                                insets.getSystemWindowInsetBottom());
-                        onInsetsChanged(insets);
-                        setWillNotDraw(!insets.hasSystemWindowInsets() || mInsetForeground == null);
-                        ViewCompat.postInvalidateOnAnimation(ScrimInsetsFrameLayout.this);
-                        return insets;
-                    }
-                });
+        ViewCompat.setOnApplyWindowInsetsListener(this, (v, insets) -> {
+            if (null == mInsets) {
+                mInsets = new Rect();
+            }
+            mInsets.set(insets.getSystemWindowInsetLeft(),
+                    insets.getSystemWindowInsetTop(),
+                    insets.getSystemWindowInsetRight(),
+                    insets.getSystemWindowInsetBottom());
+            onInsetsChanged(insets);
+            setWillNotDraw(!insets.hasSystemWindowInsets() || mInsetForeground == null);
+            ViewCompat.postInvalidateOnAnimation(ScrimInsetsFrameLayout.this);
+            return insets;
+        });
     }
 
     @Override

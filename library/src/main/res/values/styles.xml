@@ -18,7 +18,7 @@
 
     <style name="Widget.AppCore.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:id">@id/toolbar</item>
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <!--<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
     </style>
 
     <style name="Widget.AppCore.TabLayout" parent="Widget.AppCompat.ActionBar.TabBar">

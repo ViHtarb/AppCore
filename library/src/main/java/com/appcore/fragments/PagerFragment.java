@@ -35,9 +35,7 @@ public abstract class PagerFragment extends Fragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         if (view != null) {
-            mTabLayout = view.findViewById(R.id.tab_layout);
             mViewPager = view.findViewById(R.id.view_pager);
-
             if (mViewPager != null) {
                 mViewPager.setAdapter(getAdapter());
                 mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -60,6 +58,7 @@ public abstract class PagerFragment extends Fragment {
                 throw new IllegalStateException("Required view 'R.id.view_pager' with ID " + R.id.view_pager + " for field 'mViewPager' was not found.");
             }
 
+            mTabLayout = view.findViewById(R.id.tab_layout);
             if (mTabLayout != null) {
                 mTabLayout.setupWithViewPager(mViewPager);
             }

@@ -19,18 +19,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
-    testImplementation 'junit:junit:' + rootProject.ext.junitVersion
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha08'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha08'
     implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidxLibraryVersion
-    implementation 'com.google.android.material:material:' + rootProject.ext.androidxLibraryVersion
+    implementation 'com.google.android.material:material:' + rootProject.ext.materialLibraryVersion
     implementation project(':library')
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:' + rootProject.ext.butterKnifeVersion
+
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    testImplementation 'junit:junit:' + rootProject.ext.junitVersion
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -59,16 +59,6 @@ public final class Utils {
     }
 
     /**
-     * @return the device imei
-     *
-     * @deprecated Use {@link #getInstanceId()}} instead.
-     */
-    @Deprecated
-    public static String getImei() {
-        return getInstanceId();
-    }
-
-    /**
      * @return the Instance Id
      */
     public static String getInstanceId() {

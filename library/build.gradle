@@ -19,16 +19,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     testImplementation 'junit:junit:' + rootProject.ext.junitVersion
     implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidxLibraryVersion
     implementation 'androidx.recyclerview:recyclerview-selection:' + rootProject.ext.androidxLibraryVersion
-    implementation 'com.google.android.material:material:' + rootProject.ext.androidxLibraryVersion
+    implementation 'com.google.android.material:material:' + rootProject.ext.materialLibraryVersion
     implementation 'com.google.firebase:firebase-core:' + rootProject.ext.firebaseCoreLibraryVersion
     implementation 'com.google.code.gson:gson:' + rootProject.ext.gsonVersion
     api 'com.jakewharton:butterknife:' + rootProject.ext.butterKnifeVersion

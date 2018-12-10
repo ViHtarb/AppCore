@@ -11,5 +11,7 @@ public interface PageFragment {
 
     CharSequence getTitle(@NonNull Context context);
 
-    void onSelected(); // TODO in java 8 implement this method
+    default void onSelected() {
+
+    }
 }

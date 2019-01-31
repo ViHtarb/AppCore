@@ -26,18 +26,17 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha08'
-    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha08'
-    implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidxLibraryVersion
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha11'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha11'
+    implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidXVersions.appCompat
     implementation 'com.google.android.material:material:' + rootProject.ext.materialLibraryVersion
     implementation project(':library')
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:' + rootProject.ext.butterKnifeVersion
 
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     testImplementation 'junit:junit:' + rootProject.ext.junitVersion
+    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 }
 
 apply plugin: 'com.google.gms.google-services'

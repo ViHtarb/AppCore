@@ -1,6 +1,7 @@
 package com.appcore.app;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.appcore.R;
 
@@ -21,7 +22,9 @@ public abstract class Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
+        if (getLayoutId() != View.NO_ID) {
+            setContentView(getLayoutId());
+        }
         ButterKnife.bind(this);
     }
 
@@ -35,8 +38,8 @@ public abstract class Activity extends AppCompatActivity {
      * </p>
      *
      * @param fragment The new fragment to place in the container.
-     *
-     * @deprecated Use <a href="https://developer.android.com/topic/libraries/architecture/navigation/">Navigation Architecture Component</a> instead.
+     * @deprecated Use <a href="https://developer.android.com/topic/libraries/architecture/navigation/">Navigation Architecture Component</a>
+     *             or {@link FragmentTransaction#replace(int, Fragment)} instead.
      */
     @Deprecated
     protected void openFragment(@NonNull Fragment fragment) {
@@ -46,7 +49,11 @@ public abstract class Activity extends AppCompatActivity {
 
     /**
      * Return the current activity layout id.
+     *
+     * @see androidx.annotation.ContentView
      */
     @LayoutRes
-    protected abstract int getLayoutId();
+    protected int getLayoutId() {
+        return View.NO_ID;
+    }
 }

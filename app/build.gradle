@@ -26,8 +26,8 @@ android {
 }
 
 dependencies {
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha11'
-    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha11'
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-beta01'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0-beta01'
     implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidXVersions.appCompat
     implementation 'com.google.android.material:material:' + rootProject.ext.materialLibraryVersion
     implementation project(':library')

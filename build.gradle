@@ -32,20 +32,20 @@ ext {
     targetSdkVersion = 28
 
     androidXVersions = [
-        appCompat             : '1.1.0-alpha01',
+        appCompat             : '1.1.0-alpha02',
         annotation            : '1.1.0-alpha01',
         core                  : '1.1.0-alpha04',
         activity              : '1.0.0-alpha04',
-        fragment              : '1.1.0-alpha03',
+        fragment              : '1.1.0-alpha04',
         recyclerView          : '1.1.0-alpha02',
         recyclerViewSelection : '1.1.0-alpha01'
     ]
 
     materialLibraryVersion = "1.1.0-alpha03"
-    firebaseCoreLibraryVersion = "16.0.6"
+    firebaseCoreLibraryVersion = "16.0.7"
     butterKnifeVersion = "10.0.0"
 
     gsonVersion = "2.8.5"
 
-    junitVersion = "4.12"
+    junitVersion = "4.13-beta-2"
 }

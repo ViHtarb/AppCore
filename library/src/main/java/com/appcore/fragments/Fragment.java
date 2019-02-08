@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.appcore.R;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.ContentView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,7 +74,14 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
     @Override
     @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), null);
+        View view;
+
+        ContentView annotation = getClass().getAnnotation(ContentView.class);
+        if (annotation != null) {
+            view = super.onCreateView(inflater, container, savedInstanceState);
+        } else {
+            view = inflater.inflate(getLayoutId(), null);
+        }
         mUnBinder = ButterKnife.bind(this, view);
 
         mToolbar = view.findViewById(R.id.toolbar);
@@ -150,7 +158,12 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
 
     /**
      * Return the current fragment layout id.
+     *
+     * @deprecated Use {@link androidx.annotation.ContentView} instead.
      */
+    @Deprecated
     @LayoutRes
-    protected abstract int getLayoutId();
+    protected int getLayoutId() {
+        return View.NO_ID;
+    }
 }

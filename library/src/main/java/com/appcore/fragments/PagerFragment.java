@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.appcore.R;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.ContentView;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -24,9 +26,13 @@ public abstract class PagerFragment extends Fragment {
     protected TabLayout mTabLayout;
     protected ViewPager mViewPager;
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_pager;
+    public PagerFragment() {
+        super(R.layout.fragment_pager);
+    }
+
+    @ContentView
+    public PagerFragment(@LayoutRes int contentLayoutId) {
+        super(contentLayoutId);
     }
 
     @Nullable

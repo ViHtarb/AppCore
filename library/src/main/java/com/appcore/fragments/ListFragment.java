@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.appcore.R;
 
+import androidx.annotation.ContentView;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,9 +42,13 @@ public abstract class ListFragment extends Fragment {
     protected SwipeRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_list;
+    public ListFragment() {
+        super(R.layout.fragment_list);
+    }
+
+    @ContentView
+    public ListFragment(@LayoutRes int contentLayoutId) {
+        super(contentLayoutId);
     }
 
     @Nullable

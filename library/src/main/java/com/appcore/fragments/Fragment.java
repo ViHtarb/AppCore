@@ -59,6 +59,15 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
 
     private Unbinder mUnBinder;
 
+    public Fragment() {
+        super();
+    }
+
+    @ContentView
+    public Fragment(@LayoutRes int contentLayoutId) {
+        super(contentLayoutId);
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         if (context instanceof AppCompatActivity) {
@@ -76,8 +85,7 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view;
 
-        ContentView annotation = getClass().getAnnotation(ContentView.class);
-        if (annotation != null) {
+        if (getLayoutId() == View.NO_ID) {
             view = super.onCreateView(inflater, container, savedInstanceState);
         } else {
             view = inflater.inflate(getLayoutId(), null);
@@ -159,7 +167,7 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
     /**
      * Return the current fragment layout id.
      *
-     * @deprecated Use {@link androidx.annotation.ContentView} instead.
+     * @deprecated Use {@link #Fragment(int)} instead.
      */
     @Deprecated
     @LayoutRes

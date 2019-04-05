@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.appcore.R;
 
+import androidx.annotation.ContentView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,15 @@ import butterknife.ButterKnife;
  * Base implementation of {@link AppCompatActivity} with using {@link ButterKnife}
  */
 public abstract class Activity extends AppCompatActivity {
+
+    public Activity() {
+        super();
+    }
+
+    @ContentView
+    public Activity(@LayoutRes int contentLayoutId) {
+        super(contentLayoutId);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

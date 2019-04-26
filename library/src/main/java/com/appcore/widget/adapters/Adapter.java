@@ -46,8 +46,8 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new OnClickListener());
-            itemView.setOnLongClickListener(new OnLongClickListener());
+            itemView.setOnClickListener(this::onClick);
+            itemView.setOnLongClickListener(this::onLongClick);
 
             ButterKnife.bind(this, itemView);
         }
@@ -70,22 +70,6 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
 
         private T getCurrentItem() {
             return getItem(getAdapterPosition());
-        }
-
-        private class OnClickListener implements View.OnClickListener {
-
-            @Override
-            public void onClick(View v) {
-                ViewHolder.this.onClick(v);
-            }
-        }
-
-        private class OnLongClickListener implements View.OnLongClickListener {
-
-            @Override
-            public boolean onLongClick(View v) {
-                return ViewHolder.this.onLongClick(v);
-            }
         }
     }
 

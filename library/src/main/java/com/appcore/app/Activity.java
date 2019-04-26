@@ -60,8 +60,9 @@ public abstract class Activity extends AppCompatActivity {
     /**
      * Return the current activity layout id.
      *
-     * @see androidx.annotation.ContentView
+     * @deprecated Use {@link #Activity(int)} instead.
      */
+    @Deprecated
     @LayoutRes
     protected int getLayoutId() {
         return View.NO_ID;

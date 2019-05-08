@@ -17,7 +17,7 @@ public abstract class FragmentStatePagerAdapter extends androidx.fragment.app.Fr
     private final Context mContext;
 
     public FragmentStatePagerAdapter(Context context, FragmentManager fm) {
-        super(fm, RESUME_ONLY_CURRENT_FRAGMENT);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
     }
 

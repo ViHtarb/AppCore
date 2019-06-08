@@ -6,7 +6,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0-beta01'
+        classpath 'com.android.tools.build:gradle:3.6.0-alpha03'
         classpath 'com.google.gms:google-services:4.2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -32,16 +32,16 @@ ext {
     targetSdkVersion = 28
 
     androidXVersions = [
-        appCompat             : '1.1.0-alpha05',
-        annotation            : '1.1.0-rc01',
-        core                  : '1.1.0-beta01',
-        activity              : '1.0.0-alpha08',
-        fragment              : '1.1.0-alpha08',
-        recyclerView          : '1.1.0-alpha05',
-        recyclerViewSelection : '1.1.0-alpha01'
+        appCompat             : '1.1.0-beta01',
+        annotation            : '1.1.0',
+        core                  : '1.1.0-rc01',
+        activity              : '1.0.0-beta01',
+        fragment              : '1.1.0-beta01',
+        recyclerView          : '1.1.0-alpha06',
+        recyclerViewSelection : '1.1.0-alpha05'
     ]
 
-    materialLibraryVersion = "1.1.0-alpha06"
+    materialLibraryVersion = "1.1.0-alpha07"
     firebaseCoreLibraryVersion = "16.0.9"
     butterKnifeVersion = "10.1.0"
 

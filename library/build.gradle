@@ -31,8 +31,9 @@ dependencies {
     implementation 'androidx.core:core:' + rootProject.ext.androidXVersions.core
     implementation 'androidx.activity:activity:' + rootProject.ext.androidXVersions.activity
     implementation 'androidx.fragment:fragment:' + rootProject.ext.androidXVersions.fragment
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.ext.androidXVersions.recyclerview
+    implementation 'androidx.recyclerview:recyclerview:' + rootProject.ext.androidXVersions.recyclerView
     implementation 'androidx.recyclerview:recyclerview-selection:' + rootProject.ext.androidXVersions.recyclerViewSelection
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:' + rootProject.ext.androidXVersions.swipeRefreshLayout
     implementation 'com.google.android.material:material:' + rootProject.ext.materialLibraryVersion
     implementation 'com.google.firebase:firebase-core:' + rootProject.ext.firebaseCoreLibraryVersion
     implementation 'com.google.code.gson:gson:' + rootProject.ext.gsonVersion

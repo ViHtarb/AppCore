@@ -1,9 +1,7 @@
 package com.appcore.fragments;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.appcore.R;
 
@@ -25,7 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * </p>
  *
  * <p>
- * For implement custom layout your need override {@link #getLayoutId()}
+ * For implement custom layout your need override constructor with custom layout id
  * and this layout must contain {@link RecyclerView} with id {@link R.id#recycler_view}
  * {@code android:id="id/recycler_view"}.
  * </p>
@@ -51,25 +49,21 @@ public abstract class ListFragment extends Fragment {
         super(contentLayoutId);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        if (view != null) {
-            mRecyclerView = view.findViewById(R.id.recycler_view);
-            if (mRecyclerView != null) {
-                mRecyclerView.setAdapter(getAdapter());
-            } else {
-                throw new IllegalStateException("Required view 'R.id.recycler_view' with ID " + R.id.recycler_view + " for field 'mRecyclerView' was not found.");
-            }
-
-            mRefreshLayout = view.findViewById(R.id.refresh_layout);
-            if (mRefreshLayout != null) {
-                mRefreshLayout.setOnRefreshListener(this::onRefresh);
-            }
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        if (mRecyclerView != null) {
+            mRecyclerView.setAdapter(getAdapter());
+        } else {
+            throw new IllegalStateException("appcore:ListFragment: Required view 'R.id.recycler_view' with ID " + R.id.recycler_view + " for field 'mRecyclerView' was not found.");
         }
-        return view;
+
+        mRefreshLayout = view.findViewById(R.id.refresh_layout);
+        if (mRefreshLayout != null) {
+            mRefreshLayout.setOnRefreshListener(this::onRefresh);
+        }
     }
 
     protected void onRefresh() {

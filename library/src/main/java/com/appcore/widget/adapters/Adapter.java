@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Viнt@rь on 06.11.2015
@@ -48,8 +47,6 @@ public abstract class Adapter<VH extends RecyclerView.ViewHolder, T> extends Rec
             super(itemView);
             itemView.setOnClickListener(this::onClick);
             itemView.setOnLongClickListener(this::onLongClick);
-
-            ButterKnife.bind(this, itemView);
         }
 
         @CallSuper

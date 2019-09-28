@@ -1,9 +1,7 @@
 package com.appcore.fragments;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.appcore.R;
 import com.google.android.material.tabs.TabLayout;
@@ -18,7 +16,26 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * Created by Viнt@rь on 18.04.2016
+ * Base implementation of {@link Fragment} with implemented binding
+ * {@link TabLayout} and {@link ViewPager} to this fragment.
+ *
+ * <p>
+ * Fragment already has layout {@link R.layout#fragment_pager} which
+ * contains {@link TabLayout} with id {@link R.id#tab_layout}
+ * and {@link ViewPager} with id {@link R.id#view_pager}.
+ * </p>
+ *
+ * <p>
+ * For implement custom layout your need override constructor with custom layout id
+ * and this layout must contain {@link ViewPager} with id {@link R.id#view_pager}
+ * {@code android:id="id/view_pager"}.
+ * </p>
+ *
+ * <p>
+ * If you want implement custom layout with {@link TabLayout} then this
+ * layout must contain {@link TabLayout} with id {@link R.id#tab_layout}
+ * {@code android:id="id/tab_layout"}.
+ * </p>
  */
 public abstract class PagerFragment extends Fragment {
 
@@ -35,42 +52,37 @@ public abstract class PagerFragment extends Fragment {
         super(contentLayoutId);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        if (view != null) {
-            mViewPager = view.findViewById(R.id.view_pager);
-            if (mViewPager != null) {
-                mViewPager.setAdapter(getAdapter());
-                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                        PagerFragment.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                    }
+        mViewPager = view.findViewById(R.id.view_pager);
+        if (mViewPager != null) {
+            mViewPager.setAdapter(getAdapter());
+            mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    PagerFragment.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                }
 
-                    @Override
-                    public void onPageSelected(int position) {
-                        PagerFragment.this.onPageSelected(position);
-                    }
+                @Override
+                public void onPageSelected(int position) {
+                    PagerFragment.this.onPageSelected(position);
+                }
 
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-                        PagerFragment.this.onPageScrollStateChanged(state);
-                    }
-                });
-            } else {
-                throw new IllegalStateException("Required view 'R.id.view_pager' with ID " + R.id.view_pager + " for field 'mViewPager' was not found.");
-            }
-
-            mTabLayout = view.findViewById(R.id.tab_layout);
-            if (mTabLayout != null) {
-                mTabLayout.setupWithViewPager(mViewPager);
-            }
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                    PagerFragment.this.onPageScrollStateChanged(state);
+                }
+            });
+        } else {
+            throw new IllegalStateException("appcore:PagerFragment: Required view 'R.id.view_pager' with ID " + R.id.view_pager + " for field 'mViewPager' was not found.");
         }
 
-        return view;
+        mTabLayout = view.findViewById(R.id.tab_layout);
+        if (mTabLayout != null) {
+            mTabLayout.setupWithViewPager(mViewPager);
+        }
     }
 
     protected void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

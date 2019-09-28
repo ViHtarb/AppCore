@@ -6,8 +6,9 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0-alpha03'
-        classpath 'com.google.gms:google-services:4.3.0'
+        classpath 'com.android.tools.build:gradle:3.6.0-alpha12'
+        classpath 'com.google.gms:google-services:4.3.2'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.0-alpha03"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -36,7 +37,7 @@ ext {
         annotation            : '1.1.0',
         core                  : '1.2.0-alpha04',
         activity              : '1.1.0-alpha03',
-        fragment              : '1.2.0-alpha03',
+        fragment              : '1.2.0-alpha04',
         recyclerView          : '1.1.0-beta04',
         recyclerViewSelection : '1.1.0-alpha06',
         swipeRefreshLayout    : '1.1.0-alpha02'
@@ -44,7 +45,7 @@ ext {
 
     materialLibraryVersion = "1.1.0-alpha10"
     firebaseCoreLibraryVersion = "17.2.0"
-    butterKnifeVersion = "10.1.0"
+    //butterKnifeVersion = "10.1.0"
 
     gsonVersion = "2.8.5"
 

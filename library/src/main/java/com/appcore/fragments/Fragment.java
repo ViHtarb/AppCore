@@ -17,15 +17,9 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
- * Base implementation of {@link androidx.fragment.app.Fragment} with using {@link ButterKnife}
- *
- * <p>
  * For using this fragment implementation your activity must be extend {@link AppCompatActivity}
- * </p>
  *
  * <p>
  * If in current fragment layout contains {@link R.id#toolbar} id then {@link Toolbar} object
@@ -54,10 +48,7 @@ import butterknife.Unbinder;
 public abstract class Fragment extends androidx.fragment.app.Fragment {
     private AppCompatActivity mActivity;
 
-    @Nullable
     protected Toolbar mToolbar;
-
-    private Unbinder mUnBinder;
 
     public Fragment() {
         super();
@@ -79,32 +70,11 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
         }
     }
 
-    @Nullable
     @Override
     @CallSuper
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view;
-
-        if (getLayoutId() == View.NO_ID) {
-            view = super.onCreateView(inflater, container, savedInstanceState);
-        } else {
-            view = inflater.inflate(getLayoutId(), null);
-        }
-        mUnBinder = ButterKnife.bind(this, view);
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mToolbar = view.findViewById(R.id.toolbar);
-        if (mToolbar != null) {
-            mActivity.setSupportActionBar(mToolbar);
-        }
-
-        return view;
-    }
-
-    @Override
-    @CallSuper
-    public void onDestroyView() {
-        super.onDestroyView();
-        mUnBinder.unbind();
+        mActivity.setSupportActionBar(mToolbar);
     }
 
     /**
@@ -116,7 +86,6 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
      *
      * @param showHomeAsUp true to show the user that selecting home will return one
      *                     level up rather than to the top level of the app.
-     *
      * @see ActionBar#setDisplayOptions(int)
      * @see ActionBar#setDisplayOptions(int, int)
      */
@@ -162,16 +131,5 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(enabled);
         }
-    }
-
-    /**
-     * Return the current fragment layout id.
-     *
-     * @deprecated Use {@link #Fragment(int)} instead.
-     */
-    @Deprecated
-    @LayoutRes
-    protected int getLayoutId() {
-        return View.NO_ID;
     }
 }

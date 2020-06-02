@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.appcore.sample"
@@ -23,16 +23,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
-    implementation 'androidx.navigation:navigation-fragment:2.1.0-alpha06'
-    implementation 'androidx.navigation:navigation-ui:2.1.0-alpha06'
+    implementation 'androidx.navigation:navigation-fragment:2.2.0'
+    implementation 'androidx.navigation:navigation-ui:2.2.0'
     implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidXVersions.appCompat
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:' + rootProject.ext.androidXVersions.swipeRefreshLayout
     implementation 'com.google.android.material:material:' + rootProject.ext.materialLibraryVersion
     implementation project(':library')
 
-    annotationProcessor 'com.jakewharton:butterknife-compiler:' + rootProject.ext.butterKnifeVersion
+    //annotationProcessor 'com.jakewharton:butterknife-compiler:' + rootProject.ext.butterKnifeVersion
 
     testImplementation 'junit:junit:' + rootProject.ext.junitVersion
     androidTestImplementation 'androidx.test:runner:1.2.0'

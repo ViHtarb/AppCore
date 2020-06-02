@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/testFragment">
+
+    <fragment
+        android:id="@+id/testCollapsingFragment"
+        android:name="com.appcore.sample.fragments.TestCollapsingFragment">
+        <action
+            android:id="@+id/action_to_testFragment"
+            app:destination="@+id/testFragment"
+            app:popUpTo="@+id/testCollapsingFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.appcore.sample.fragments.TestFragment"
+        android:label="TestFragment">
+        <action
+            android:id="@+id/action_testFragment_to_testListFragment"
+            app:destination="@id/testListFragment"/>
+        <argument
+            android:name="test"
+            app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/testListFragment"
+        android:name="com.appcore.sample.fragments.TestListFragment"
+        android:label="TestListFragment">
+        <action
+            android:id="@+id/action_testListFragment_to_testFragment"
+            app:destination="@id/testFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/testListFragment2"
+        android:name="com.appcore.sample.TestListFragment"
+        android:label="TestListFragment"
+        tools:layout="@layout/fragment_test_list"/>
+</navigation>

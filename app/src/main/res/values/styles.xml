@@ -1,11 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCore">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCore.Light">
+
+        <!--<item name="android:textColorPrimary">#fff</item>-->
+
+        <!--<item name="android:statusBarColor">@color/colorStatusBar</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--<item name="colorOnPrimary">#fff</item>-->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <!-- Customize your theme here. -->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>-->
     </style>
 </resources>

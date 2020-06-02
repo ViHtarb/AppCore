@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ImageViewGroup">
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="maxColumns" format="integer"/>
+        <attr name="maxRows" format="integer"/>
+
+        <!-- Horizontal spacing between two items being laid out. -->
+        <attr name="columnSpacing" format="dimension"/>
+        <!-- Vertical Spacing between two lines of items being laid out. -->
+        <attr name="rowSpacing" format="dimension"/>
+    </declare-styleable>
+</resources>

@@ -2,17 +2,35 @@ package com.appcore.sample.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.appcore.fragments.Fragment;
 import com.appcore.sample.R;
+import com.appcore.sample.databinding.FragmentTestBinding;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.OnClick;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
+//import butterknife.BindView;
+//import butterknife.OnClick;
 
 
 /**
@@ -34,13 +52,164 @@ public class TestFragment extends Fragment {
     //@BindView(R.id.test_view)
     //ImageView mImageView;
 
+    //@BindView(R.id.image_view_group)
+/*
+    @BindView(R.id.image1)
+    ImageView imageView1;
+
+    @BindView(R.id.image2)
+    ImageView imageView2;
+
+    @BindView(R.id.image3)
+    ImageView imageView3;
+
+    @BindView(R.id.image4)
+    ImageView imageView4;*/
+    private FragmentTestBinding mBinding;
+
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_test;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setSharedElementEnterTransition(new ChangeBounds());
     }
 
-    @OnClick(R.id.test_button)
-    public void onClickTest() {
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = FragmentTestBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setDisplayHomeAsUpEnabled(true);
+
+        String startString = "10-00";
+        String endString = "22-00";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH-mm", Locale.getDefault());
+
+        SimpleDateFormat zeroTimeZoneFormat = new SimpleDateFormat("HH-mm", Locale.getDefault());
+        zeroTimeZoneFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        SimpleDateFormat oneTimeZoneFormat = new SimpleDateFormat("HH-mm", Locale.getDefault());
+        oneTimeZoneFormat.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
+
+        Date start, end;
+        try {
+            start = simpleDateFormat.parse(startString);
+            end = simpleDateFormat.parse(startString);
+
+            if (start != null && end != null) {
+                Log.d("TEST", start.toString());
+                Log.d("TEST", end.toString());
+
+                final Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+
+                TimeZone timeZone = calendar.getTimeZone();
+                long millisOfDay = calendar.getTimeInMillis() + timeZone.getRawOffset()/* + timeZone.getDSTSavings()*/;
+
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+
+                Log.d("TEST", simpleDateFormat.format(millisOfDay));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //setSharedElementEnterTransition(new ChangeBounds());
+        //setSharedElementReturnTransition(new ChangeBounds());
+
+        //Log.d("TEST", "onViewCreate");
+
+       /* String image1 = "https://cdn.humoraf.ru/wp-content/uploads/2017/08/23-14.jpg";
+        String image2 = "https://natworld.info/wp-content/uploads/2018/01/%D0%A1%D0%BE%D1%87%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%BC%D1%83-%D0%9F%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D0%B0-900x500.jpeg";
+        String image3 = "https://cdn.humoraf.ru/wp-content/uploads/2017/08/23-14.jpg";
+        String image4 = "https://cdn.humoraf.ru/wp-content/uploads/2017/08/23-14.jpg";*/
+/*
+        imageView1.setImageURL(image1);
+        imageView2.setImageURL(image2);
+        imageView3.setImageURL(image3);
+        imageView4.setImageURL(image4);*/
+
+        //mImageViewGroup.add(string);
+        //mImageViewGroup.add(string);
+        //mImageViewGroup.add(string);
+        //mImageViewGroup.add(string);
+        //mImageViewGroup.add(string);
+        //mImageViewGroup.add(string);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_test, menu);
+    }
+
+    int i = 0;
+    private final List<String> mList = new ArrayList<>();
+
+    //@OnClick(R.id.add_button)
+    void onAddClick() {
+        String image1 = "https://cdn.humoraf.ru/wp-content/uploads/2017/08/23-14.jpg";
+        String image2 = "https://natworld.info/wp-content/uploads/2018/01/%D0%A1%D0%BE%D1%87%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%BC%D1%83-%D0%9F%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D0%B0-900x500.jpeg";
+        String image3 = "https://cdn.humoraf.ru/wp-content/uploads/2017/08/23-14.jpg";
+        String image4 = "https://cdn.humoraf.ru/wp-content/uploads/2017/08/23-14.jpg";
+        String[] images = {image1, image2, image3/*, image4*/};
+
+/*        int columns;
+        int rows;
+
+        if (images.length == 3) {
+            columns = images.length;
+            rows = 1;
+        } else {
+            columns = 2;
+            rows = 2;
+        }
+
+        mImageViewGroup.setColumnCount(columns);
+        mImageViewGroup.setRowCount(rows);*/
+        //for (String image : images) {
+            //mImageViewGroup.add(images[i]);
+        //}
+        if (i == images.length - 1) {
+            i = 0;
+        } else {
+            i++;
+        }
+    }
+
+    //@OnClick(R.id.remove_button)
+    void onRemoveClick() {
+/*        for (int i = 0; i < mImageViewGroup.getChildCount(); i++) {
+            //ImageView child = (ImageView) mImageViewGroup.getChildAt(i);
+            //Drawable drawable = child.getDrawable();
+        }
+        mImageViewGroup.clear();*/
+    }
+
+    //@OnClick(R.id.test_field)
+    public void onClick(View v) {
+        Navigation.findNavController(requireActivity(), R.id.navigation_host_fragment).navigate(R.id.action_testFragment_to_testListFragment);
+    }
+
+    //@OnClick(R.id.test_button_2)
+    public void onClickTest(View v) {
+        //FragmentManager fragmentManager = getChildFragmentManager();
+        //fragmentManager.beginTransaction().replace(R.id.container, new TestFragment()).addToBackStack("test").commit();
         //Log.d("TEST", Utils.getInstanceId());
 
         //final Test testObject = new Test("DEFAULT");
@@ -117,7 +286,7 @@ public class TestFragment extends Fragment {
     }
 */
 
-    @OnClick(R.id.test_button_2)
+   //@OnClick(R.id.test_button_2)
     public void onTestClick() {
 /*        Log.d("TEST", String.valueOf(DateUtils.getRelativeTimeSpanString(mStartTime, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS,
                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL)));

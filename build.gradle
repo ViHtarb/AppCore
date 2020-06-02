@@ -6,9 +6,9 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0-alpha12'
-        classpath 'com.google.gms:google-services:4.3.2'
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.0-alpha03"
+        classpath 'com.android.tools.build:gradle:4.1.0-alpha04'
+        classpath 'com.google.gms:google-services:4.3.3'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.0"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -27,27 +27,26 @@ task clean(type: Delete) {
 }
 
 ext {
-    compileSdkVersion = 28
-    buildToolsVersion = "28.0.3"
+    compileSdkVersion = 29
     minSdkVersion = 16
-    targetSdkVersion = 28
+    targetSdkVersion = 29
 
     androidXVersions = [
         appCompat             : '1.1.0',
         annotation            : '1.1.0',
-        core                  : '1.2.0-alpha04',
-        activity              : '1.1.0-alpha03',
-        fragment              : '1.2.0-alpha04',
-        recyclerView          : '1.1.0-beta04',
-        recyclerViewSelection : '1.1.0-alpha06',
-        swipeRefreshLayout    : '1.1.0-alpha02'
+        core                  : '1.2.0-rc01',
+        activity              : '1.1.0',
+        fragment              : '1.2.0',
+        recyclerView          : '1.2.0-alpha01',
+        recyclerViewSelection : '1.1.0-beta01',
+        swipeRefreshLayout    : '1.1.0-alpha03'
     ]
 
-    materialLibraryVersion = "1.1.0-alpha10"
-    firebaseCoreLibraryVersion = "17.2.0"
+    materialLibraryVersion = "1.2.0-alpha04"
+    firebaseCoreLibraryVersion = "17.2.1"
     //butterKnifeVersion = "10.1.0"
 
-    gsonVersion = "2.8.5"
+    gsonVersion = "2.8.6"
 
-    junitVersion = "4.13-beta-2"
+    junitVersion = "4.13-rc-2"
 }

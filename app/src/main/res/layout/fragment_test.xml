@@ -3,168 +3,129 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.appbar.AppBarLayout>
-    <!--
-        <ProgressBar
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="50dp"
-            android:indeterminate="false"
-            android:indeterminateOnly="false"
-            android:progress="20"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <android.support.v7.widget.AppCompatSeekBar
-            android:layout_width="308dp"
-            android:layout_height="222dp"
-            android:layout_marginTop="200dp"
-            android:progressDrawable="@drawable/seekbar_track_material"
-
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-        <com.appcore.sample.widget.view.SeekBar
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
-
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="94dp"
+            android:layout_marginStart="94dp"
+            app:layoutManager="LinearLayoutManager"/>
+
+        <!--<GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@android:color/holo_green_dark"
+            android:columnCount="2"
+            android:rowCount="2">
+
+            <com.imageview.ImageView
+                android:id="@+id/image1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_search_black_24dp"/>
+
+            <com.imageview.ImageView
+                android:id="@+id/image2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_search_black_24dp"/>
+
+            <com.imageview.ImageView
+                android:id="@+id/image3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_search_black_24dp"/>
+
+            <com.imageview.ImageView
+                android:id="@+id/image4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_search_black_24dp"/>
+        </GridLayout>-->
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:text="Add"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/test_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="test"/>
+        <Button
+            android:id="@+id/remove_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Remove"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/test_button_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                app:backgroundTint="@android:color/transparent"
-                app:strokeColor="@color/colorPrimary"
-                app:strokeWidth="2dp"/>
+        <!--        <EditText
+                    android:id="@+id/test_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:fitsSystemWindows="true"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <!-- <android.support.design.chip.ChipGroup
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 app:singleLine="true">
-
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
-
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
-
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
-
-                 <android.support.design.chip.Chip
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:checkable="true"
-                     app:chipText="Test"/>
-
-             </android.support.design.chip.ChipGroup>-->
-
-
-            <!--            <Button
-                            android:id="@+id/test_button2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Test"/>-->
-
-            <!--
-                    <android.support.design.button.MaterialButton
-                        android:id="@+id/test_button"
-                        android:layout_width="85dp"
-                        android:layout_height="48dp"
-                        android:gravity="center"
-                        android:text="Test"
-                        android:textColor="@color/colorPrimary"
-                        app:backgroundTint="@android:color/transparent"
-                        app:cornerRadius="24dp"
-                        app:strokeColor="@color/colorPrimary"
-                        app:strokeWidth="2dp"/>
-            -->
-
-
-            <!--        <android.support.v7.widget.RecyclerView
-                        android:id="@id/recycler_view"
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>-->
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>-->
 
-    <!--
-            <TextView
-                android:id="@+id/test_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="50dp"/>
-    -->
 
-    <!--        <Button
-                android:id="@+id/test_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="100dp"/>
+    </FrameLayout>
+
+    <!--<androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/test_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_heart"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="70dp"
-                android:layout_marginBottom="10dp"/>
+                android:id="@+id/image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:transitionName="image"
+                android:src="@drawable/ic_search_black_24dp"/>
 
             <Button
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:id="@+id/test_button_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_gravity="bottom"/>-->
-
-    <!--        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"/>-->
+                android:text="1"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

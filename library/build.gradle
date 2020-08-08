@@ -25,17 +25,18 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:' + rootProject.ext.androidXVersions.appCompat
-    implementation 'androidx.annotation:annotation:' + rootProject.ext.androidXVersions.annotation
-    implementation 'androidx.core:core:' + rootProject.ext.androidXVersions.core
-    implementation 'androidx.activity:activity:' + rootProject.ext.androidXVersions.activity
-    implementation 'androidx.fragment:fragment:' + rootProject.ext.androidXVersions.fragment
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.ext.androidXVersions.recyclerView
-    implementation 'androidx.recyclerview:recyclerview-selection:' + rootProject.ext.androidXVersions.recyclerViewSelection
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:' + rootProject.ext.androidXVersions.swipeRefreshLayout
-    implementation 'com.google.android.material:material:' + rootProject.ext.materialLibraryVersion
-    implementation 'com.google.firebase:firebase-core:' + rootProject.ext.firebaseCoreLibraryVersion
-    implementation 'com.google.code.gson:gson:' + rootProject.ext.gsonVersion
+    implementation "androidx.appcompat:appcompat:$androidXVersions.appCompat"// + rootProject.ext.androidXVersions.appCompat
+    implementation "androidx.annotation:annotation:$androidXVersions.annotation"// + rootProject.ext.androidXVersions.annotation
+    implementation "androidx.core:core:$androidXVersions.core"// + rootProject.ext.androidXVersions.core
+    implementation "androidx.activity:activity:$androidXVersions.activity"// + rootProject.ext.androidXVersions.activity
+    implementation "androidx.fragment:fragment:$androidXVersions.fragment"// + rootProject.ext.androidXVersions.fragment
+    implementation "androidx.recyclerview:recyclerview:$androidXVersions.recyclerView"// + rootProject.ext.androidXVersions.recyclerView
+    implementation "androidx.recyclerview:recyclerview-selection:$androidXVersions.recyclerViewSelection"// + rootProject.ext.androidXVersions.recyclerViewSelection
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$androidXVersions.swipeRefreshLayout"// + rootProject.ext.androidXVersions.swipeRefreshLayout
+    implementation "com.google.android.material:material:$materialVersion"// + rootProject.ext.materialLibraryVersion
+    //implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"// + rootProject.ext.firebaseCoreLibraryVersion
+    implementation "com.google.firebase:firebase-iid:$firebaseIidVersion"// + rootProject.ext.firebaseCoreLibraryVersion
+    implementation "com.google.code.gson:gson:$gsonVersion"// + rootProject.ext.gsonVersion
     //api 'com.jakewharton:butterknife:' + rootProject.ext.butterKnifeVersion
     api 'com.squareup:otto:1.3.8'
 

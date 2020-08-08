@@ -5,4 +5,8 @@
     <string name="activity_h_ago">%d h ago</string>
 
     <string name="now">Just now</string>
+
+    <string name="test">&lt;s>S&lt;/s> &lt;b>%2$d new messages&lt;/b></string>
+    <string name="test1">&lt;del>DEL&lt;/del></string>
+    <string name="test2">&lt;strike>STRIKE&lt;/strike></string>
 </resources>

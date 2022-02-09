@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: '../maven_push.gradle'
+//apply from: '../maven_push.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -7,8 +7,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "${version}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
